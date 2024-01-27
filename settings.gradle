@@ -1,4 +1,5 @@
 rootProject.name = 'HrManagementGroup001'
 include 'ConfigServer'
 include 'PersonelMicroService'
+include 'ManagerMicroService'
 

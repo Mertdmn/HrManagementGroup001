@@ -24,5 +24,5 @@ public interface PersonelMapper {
 
     RegisterResponseDto fromPersonelToRegisterResponse(Personel personel);
 
-    Personel toShowDetaıls(final Personel personel);
+    Personel toShowDetails(final Personel personel);
 }

@@ -35,7 +35,6 @@ public class PersonelService {
             loginUser=personel.get().getId();
             return true;
         }
-
     }
 
 
@@ -78,7 +77,7 @@ public class PersonelService {
     public Optional<Personel> showDetails() {
         Personel personel = personelRepository.findById(loginUser)
                 .orElseThrow(() -> new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND));
-        Personel personel1 = PersonelMapper.INSTANCE.toShowDetaıls(personel);
+        Personel personel1 = PersonelMapper.INSTANCE.toShowDetails(personel);
         return personelRepository.findAll(personel1);
     }
 
