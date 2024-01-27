@@ -3,6 +3,7 @@ package com.group1.service;
 
 import com.group1.dto.request.LoginPersonelRequestDto;
 import com.group1.dto.request.RegisterRequestDto;
+import com.group1.dto.request.UpdatePersonelRequestDto;
 import com.group1.dto.response.RegisterResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.exception.ErrorType;
@@ -88,6 +89,27 @@ public class PersonelService {
         ShowResponseDto showResponseDto = PersonelMapper.INSTANCE.toShow(personel);
         return Optional.ofNullable(personelRepository.findAllBy(showResponseDto));
     }
+
+    public void update(UpdatePersonelRequestDto dto) {
+        // Personel entity'sini bul
+        Optional<Personel> existingPersonelOptional = personelRepository.findById(dto.getPersonelId());
+
+        if (existingPersonelOptional.isPresent()) {
+            Personel existingPersonel = existingPersonelOptional.get();
+
+            // Update edilecek alanları güncelle
+
+            existingPersonel.setPhone(dto.getPhone());
+            existingPersonel.setAddress(dto.getAddress());
+
+            // Güncellenmiş entity'yi kaydet
+            personelRepository.save(existingPersonel);
+        } else {
+            throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
+        }
+    }
+
+
 
 /*
     public RegisterResponseDto register(RegisterRequestDto dto) {

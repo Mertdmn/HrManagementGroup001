@@ -18,6 +18,9 @@ public class RestApiUrls {
 
     public static final String CREATESHIFTS = "/create-shifts";
 
+    public static final String UPDATE = "/update";
+
+
 
 
 

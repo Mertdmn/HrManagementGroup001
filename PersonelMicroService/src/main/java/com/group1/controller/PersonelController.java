@@ -3,6 +3,7 @@ package com.group1.controller;
 
 import com.group1.dto.request.LoginPersonelRequestDto;
 import com.group1.dto.request.RegisterRequestDto;
+import com.group1.dto.request.UpdatePersonelRequestDto;
 import com.group1.dto.response.RegisterResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.service.PersonelService;
@@ -29,7 +30,12 @@ public class PersonelController {
     public ResponseEntity<Optional<ShowResponseDto>> show(){
         return ResponseEntity.ok(personelService.show());
     }
+    @PostMapping(UPDATE)
+    public ResponseEntity<Void> update(UpdatePersonelRequestDto dto) {
+        personelService.update(dto);
+        return ResponseEntity.ok().build();
 
+    }
 /*
 
     @PostMapping(value = REGISTER, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
