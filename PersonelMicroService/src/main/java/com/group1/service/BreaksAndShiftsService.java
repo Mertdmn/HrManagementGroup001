@@ -37,13 +37,13 @@ public class BreaksAndShiftsService {
 
         BreaksAndShifts breaksAndShifts = BreaksAndShiftsMapper.INSTANCE.toShifts(shiftRequestDto);
 
-        String personelId = shiftRequestDto.getPersonelId();
-        Optional<Personel> personel = personelService.findById(personelId);
+
+        Optional<Personel> personel = personelService.findById(loginUser);
         if (personel == null) {
             throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
         }
 
-        breaksAndShifts.setPersonelId(personelId);
+
         return Optional.of(breaksAndShiftsRepository.save(breaksAndShifts));
     }
 

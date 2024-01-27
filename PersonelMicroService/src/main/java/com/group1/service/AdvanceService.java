@@ -22,23 +22,6 @@ public class AdvanceService {
     private final AdvanceRepository advanceRepository;
 
 private final PersonelService personelService;
-   /* public Optional<Advance> createAdvance(AdvanceRequestDto dto) {
-
-        Advance advance = AdvanceMapper.INSTANCE.toAdvanceRequestDto(dto);
-        dto.setState(EState.PENDING);
-        dto.setPersonelId(personelService.findByPersonelId(dto.getPersonelId()));
-        advanceRepository.save(advance);
-=========
-    public Optional<Advance> createAdvance(AdvanceRequestDto dto){
-        return Optional.empty();
->>>>>>>>> Temporary merge branch 2
-    }
-
-    public void addAdvanceForPersonel(AddAdvanceForPersonelRequestDto dto){
-        if(!personelService.existsById(dto.getPersonelId()) || !PersonelService.isPersonel(dto.getPersonelId()))
-            throw new PersonelManagerException(ErrorType.ADVANCE_NOT_FOUND);
-
-    }*/
 
     public Optional<Advance> createAdvance(AdvanceRequestDto advanceRequestDto) {
 
@@ -59,7 +42,5 @@ private final PersonelService personelService;
         // Diğer işlemleri gerçekleştirme ve avans kaydetme
         return Optional.of(advanceRepository.save(advance));
     }
-
-
 
 }

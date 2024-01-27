@@ -6,6 +6,7 @@ import com.group1.dto.request.RegisterRequestDto;
 import com.group1.dto.request.UpdatePersonelRequestDto;
 import com.group1.dto.response.RegisterResponseDto;
 import com.group1.dto.response.ShowResponseDto;
+import com.group1.repository.entity.Personel;
 import com.group1.service.PersonelService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,15 +35,9 @@ public class PersonelController {
     public ResponseEntity<Void> update(UpdatePersonelRequestDto dto) {
         personelService.update(dto);
         return ResponseEntity.ok().build();
-
     }
-/*
-
-    @PostMapping(value = REGISTER, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<RegisterResponseDto> register(@RequestBody @Valid @ModelAttribute RegisterRequestDto dto) {
-        System.out.println("Received TCNO: " + dto.getTcno());
-        return ResponseEntity.ok(personelService.register(dto));
-    }
-
-*/
+@GetMapping(SHOWDETAILS)
+public ResponseEntity<Optional<Personel>> showDetails(){
+    return ResponseEntity.ok(personelService.showDetails());
+}
 }

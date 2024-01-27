@@ -15,4 +15,5 @@ public interface PersonelRepository extends MongoRepository<Personel,String> {
    ShowResponseDto findAllBy(ShowResponseDto dto);
 
 
+   Optional<Personel> findAll(Personel personel1);
 }

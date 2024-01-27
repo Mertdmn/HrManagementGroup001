@@ -21,8 +21,6 @@ public class SpendingService {
     private final SpendingRepository spendingRepository;
     private final PersonelService personelService;
 
-
-
         public Optional<Spending> createSpending(SpendingRequestDto spendingRequestDto){
 
             // SpendingRequestDto'dan Spending entity'sine dönüştürme
@@ -35,7 +33,6 @@ public class SpendingService {
             if (personel == null) {
                 throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
             }
-
             // Spending entity'sine personel bilgisini set etme
 
             // Diğer işlemleri gerçekleştirme ve harcamayı kaydetme
