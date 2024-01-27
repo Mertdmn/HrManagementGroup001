@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Document
-public class Spending {
+public class Spending implements Serializable {
     @Id
     private String id;
     private String type;

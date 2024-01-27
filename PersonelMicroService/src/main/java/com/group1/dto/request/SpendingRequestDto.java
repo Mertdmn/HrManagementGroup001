@@ -16,7 +16,6 @@ import java.time.LocalDate;
 @Data
 public class SpendingRequestDto {
     String type;
-    String personelId;
     double amount;
     LocalDate spendingDate;
     LocalDate responseDate;

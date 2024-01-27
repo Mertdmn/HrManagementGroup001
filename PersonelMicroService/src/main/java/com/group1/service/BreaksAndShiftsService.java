@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.group1.service.PersonelService.loginUser;
+
 @Service
 @RequiredArgsConstructor
 public class BreaksAndShiftsService {
@@ -25,13 +27,10 @@ public class BreaksAndShiftsService {
 
         BreaksAndShifts breaksAndShifts = BreaksAndShiftsMapper.INSTANCE.toBreaks(breaksRequestDto);
 
-        String personelId = breaksRequestDto.getPersonelId();
-        Optional<Personel> personel = personelService.findById(personelId);
+        Optional<Personel> personel = personelService.findById(loginUser);
         if (personel == null) {
             throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
         }
-
-        breaksAndShifts.setPersonelId(personelId);
         return Optional.of(breaksAndShiftsRepository.save(breaksAndShifts));
     }
     public Optional<BreaksAndShifts> createShifts(ShiftRequestDto shiftRequestDto) {

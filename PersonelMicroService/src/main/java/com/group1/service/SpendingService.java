@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.group1.service.PersonelService.loginUser;
+
 @Service
 @RequiredArgsConstructor
 public class SpendingService {
@@ -27,8 +29,7 @@ public class SpendingService {
             Spending spending = SpendingMapper.INSTANCE.toSpending(spendingRequestDto);
 
             // Personel entity'sini çekme
-            String personelId =spendingRequestDto.getPersonelId();
-            Optional<Personel> personel =personelService.findById(personelId);
+            Optional<Personel> personel =personelService.findById(loginUser);
 
             // Eğer personel bulunamazsa, gerekli hata işlemlerini yapabilirsiniz.
             if (personel == null) {
@@ -36,7 +37,6 @@ public class SpendingService {
             }
 
             // Spending entity'sine personel bilgisini set etme
-            spending.setPersonelId(personelId);
 
             // Diğer işlemleri gerçekleştirme ve harcamayı kaydetme
             // ...

@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 public class ShiftRequestDto {
-    String personelId;
     EType type;
     LocalDate bSStartingDate;
     LocalDate bSEndingDate;

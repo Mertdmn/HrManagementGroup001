@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 public class BreaksRequestDto {
-    String personelId;
     EType type;
     LocalDate breakStartingDate;
     LocalDate breakEndingDate;

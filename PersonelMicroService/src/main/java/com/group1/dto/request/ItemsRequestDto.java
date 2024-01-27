@@ -1,5 +1,6 @@
 package com.group1.dto.request;
 
+import com.group1.utility.enums.EState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +13,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemsRequestDto {
-    private String personelTcno;
-    private LocalDate startingDate;
-    private LocalDate endingDate;
-    private String name;
+    LocalDate startingDate;
+    LocalDate endingDate;
+    String name;
+    EState State;
 
 }

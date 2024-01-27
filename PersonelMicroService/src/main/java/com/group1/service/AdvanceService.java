@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.group1.service.PersonelService.loginUser;
+
 @Service
 @RequiredArgsConstructor
 public class AdvanceService {
@@ -45,8 +47,7 @@ private final PersonelService personelService;
         Advance advance = AdvanceMapper.INSTANCE.toAdvance(advanceRequestDto);
 
         // Personel entity'sini çekme
-        String personelId = advanceRequestDto.getPersonelId();
-        Optional<Personel> personel = personelService.findById(personelId);
+        Optional<Personel> personel = personelService.findById(loginUser);
 
         // Eğer personel bulunamazsa, gerekli hata işlemlerini yapabilirsiniz.
         if (personel == null) {
@@ -54,7 +55,6 @@ private final PersonelService personelService;
         }
 
         // Spending entity'sine personel bilgisini set etme
-        advance.setPersonelId(personelId);
 
         // Diğer işlemleri gerçekleştirme ve avans kaydetme
         return Optional.of(advanceRepository.save(advance));

@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.group1.service.PersonelService.loginUser;
+
 @Service
 @RequiredArgsConstructor
 public class PermissionsService {
@@ -25,12 +27,10 @@ public class PermissionsService {
 
         Permissions permissions = PermissionsMapper.INSTANCE.toPermissions(permissionRequestDto);
 
-        String personelId = permissionRequestDto.getPersonelId();
-        Optional<Personel> personel = personelService.findById(personelId);
+        Optional<Personel> personel = personelService.findById(loginUser);
         if (personel == null) {
             throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
         }
-        permissions.setPersonelId(personelId);
         return Optional.of(permissionsRepository.save(permissions));
     }
 }
