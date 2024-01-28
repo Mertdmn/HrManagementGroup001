@@ -4,6 +4,7 @@ package com.group1.controller;
 import com.group1.dto.request.LoginPersonelRequestDto;
 import com.group1.dto.request.RegisterRequestDto;
 import com.group1.dto.request.UpdatePersonelRequestDto;
+import com.group1.dto.response.PersonelResponseDto;
 import com.group1.dto.response.RegisterResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.repository.entity.Personel;
@@ -37,7 +38,7 @@ public class PersonelController {
         return ResponseEntity.ok().build();
     }
 @GetMapping(SHOWDETAILS)
-public ResponseEntity<Optional<Personel>> showDetails(){
+public ResponseEntity<Optional<PersonelResponseDto>> showDetails(){
     return ResponseEntity.ok(personelService.showDetails());
 }
 }

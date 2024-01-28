@@ -2,6 +2,7 @@ package com.group1.controller;
 
 import com.group1.dto.request.LoginPersonelRequestDto;
 import com.group1.dto.request.UpdateRequestDto;
+import com.group1.dto.response.ManagerResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.repository.entity.Manager;
 import com.group1.service.ManagerService;
@@ -35,7 +36,7 @@ public class ManagerController {
         return ResponseEntity.ok().build();
     }
     @GetMapping(SHOWDETAILS)
-    public ResponseEntity<Optional<Manager>> showDetails(){
+    public ResponseEntity<Optional<ManagerResponseDto>> showDetails(){
         return ResponseEntity.ok(managerService.showDetails());
     }
 }

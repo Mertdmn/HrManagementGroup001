@@ -3,6 +3,7 @@ package com.group1.service;
 
 import com.group1.dto.request.LoginPersonelRequestDto;
 import com.group1.dto.request.UpdatePersonelRequestDto;
+import com.group1.dto.response.PersonelResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.exception.ErrorType;
 import com.group1.exception.PersonelManagerException;
@@ -74,11 +75,11 @@ public class PersonelService {
         }
     }
 
-    public Optional<Personel> showDetails() {
-        Personel personel = personelRepository.findById(loginUser)
+    public Optional<PersonelResponseDto> showDetails() {
+        personelRepository.findById(loginUser)
                 .orElseThrow(() -> new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND));
-        Personel personel1 = PersonelMapper.INSTANCE.toShowDetails(personel);
-        return personelRepository.findAll(personel1);
+        PersonelResponseDto personelDetails = personelRepository.findPersonelDetails(loginUser);
+        return Optional.ofNullable(personelDetails);
     }
 
     }

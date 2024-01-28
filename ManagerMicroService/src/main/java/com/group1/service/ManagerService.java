@@ -2,6 +2,7 @@ package com.group1.service;
 
 import com.group1.dto.request.LoginPersonelRequestDto;
 import com.group1.dto.request.UpdateRequestDto;
+import com.group1.dto.response.ManagerResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.exception.ErrorType;
 import com.group1.exception.ManagerException;
@@ -55,11 +56,10 @@ public class ManagerService {
             throw new ManagerException(ErrorType.MANAGER_NOT_FOUND);
         }
     }
-    public Optional<Manager> showDetails() {
-        Manager manager = managerRepository.findById(loginUser)
+    public Optional<ManagerResponseDto> showDetails() {
+        managerRepository.findById(loginUser)
                 .orElseThrow(() -> new ManagerException(ErrorType.MANAGER_NOT_FOUND));
-        Manager manager1 = ManagerMapper.INSTANCE.toShowDetails(manager);
-        return managerRepository.findAll(manager1);
+        ManagerResponseDto managerDetails = managerRepository.findManagerDetails(loginUser);
+        return Optional.ofNullable(managerDetails);
     }
-
 }
