@@ -18,7 +18,6 @@ public class AdvanceRequestDto {
     double amount;
     LocalDate date;
     EState state;
-    LocalDate responseDate;
     ECurrency currency;
 
 }

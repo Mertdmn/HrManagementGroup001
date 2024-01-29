@@ -25,7 +25,7 @@ public class PersonelController {
     private final PersonelService personelService;
 
     @PostMapping(LOGIN)
-    public ResponseEntity<Boolean> login(LoginPersonelRequestDto dto) {
+    public ResponseEntity<Boolean> login(@RequestBody LoginPersonelRequestDto dto) {
         return ResponseEntity.ok(personelService.login(dto));
     }
     @GetMapping(SHOW)

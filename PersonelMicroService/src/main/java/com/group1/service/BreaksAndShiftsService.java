@@ -11,6 +11,7 @@ import com.group1.repository.BreaksAndShiftsRepository;
 import com.group1.repository.entity.BreaksAndShifts;
 import com.group1.repository.entity.Permissions;
 import com.group1.repository.entity.Personel;
+import com.group1.utility.enums.EState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class BreaksAndShiftsService {
     public Optional<BreaksAndShifts> createBreaks(BreaksRequestDto breaksRequestDto) {
 
         BreaksAndShifts breaksAndShifts = BreaksAndShiftsMapper.INSTANCE.toBreaks(breaksRequestDto);
-
+        breaksAndShifts.setState(EState.PENDING);
         Optional<Personel> personel = personelService.findById(loginUser);
         if (personel == null) {
             throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
@@ -36,8 +37,7 @@ public class BreaksAndShiftsService {
     public Optional<BreaksAndShifts> createShifts(ShiftRequestDto shiftRequestDto) {
 
         BreaksAndShifts breaksAndShifts = BreaksAndShiftsMapper.INSTANCE.toShifts(shiftRequestDto);
-
-
+        breaksAndShifts.setState(EState.PENDING);
         Optional<Personel> personel = personelService.findById(loginUser);
         if (personel == null) {
             throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);

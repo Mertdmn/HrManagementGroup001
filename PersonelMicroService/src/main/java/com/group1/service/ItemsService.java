@@ -7,6 +7,7 @@ import com.group1.mapper.ItemsMapper;
 import com.group1.repository.ItemsRepository;
 import com.group1.repository.entity.Items;
 import com.group1.repository.entity.Personel;
+import com.group1.utility.enums.EState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class ItemsService {
 
     public Optional<Items> createItems(ItemsRequestDto dto) {
         Items items = ItemsMapper.INSTANCE.fromCreateItemsRequestDto(dto);
-
+        items.setState(EState.PENDING);
         Optional<Personel> personel = personelService.findById(loginUser);
         if (personel == null) {
             throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);

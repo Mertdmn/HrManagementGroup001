@@ -10,6 +10,7 @@ import com.group1.repository.PermissionsRepository;
 import com.group1.repository.entity.Advance;
 import com.group1.repository.entity.Permissions;
 import com.group1.repository.entity.Personel;
+import com.group1.utility.enums.EState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,8 @@ public class PermissionsService {
     public Optional<Permissions> createPermissions(PermissionRequestDto permissionRequestDto) {
 
         Permissions permissions = PermissionsMapper.INSTANCE.toPermissions(permissionRequestDto);
+
+        permissions.setState(EState.PENDING);
 
         Optional<Personel> personel = personelService.findById(loginUser);
         if (personel == null) {

@@ -29,6 +29,10 @@ public class PersonelService {
         loginUser = user;
     }
     public Boolean login(LoginPersonelRequestDto dto) {
+        Personel personel1=new Personel();
+        personel1.setEmail("abc@hotmail.com");
+        personel1.setPassword("123456");
+        personelRepository.save(personel1);
         Optional<Personel> personel=personelRepository.findOptionalByEmailAndPassword(dto.getEmail(),dto.getPassword());
         if (personel.isEmpty()||personel.get().getRole()== ERole.DISMISSED){
            throw new PersonelManagerException(ErrorType.LOGIN_ERROR);
@@ -58,7 +62,7 @@ public class PersonelService {
 
     public void update(UpdatePersonelRequestDto dto) {
         // Personel entity'sini bul
-        Optional<Personel> existingPersonelOptional = personelRepository.findById(dto.getPersonelId());
+        Optional<Personel> existingPersonelOptional = personelRepository.findById(loginUser);
 
         if (existingPersonelOptional.isPresent()) {
             Personel existingPersonel = existingPersonelOptional.get();

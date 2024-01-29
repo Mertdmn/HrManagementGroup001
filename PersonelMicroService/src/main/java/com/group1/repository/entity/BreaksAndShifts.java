@@ -1,5 +1,6 @@
 package com.group1.repository.entity;
 
+import com.group1.utility.enums.EState;
 import com.group1.utility.enums.EType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class BreaksAndShifts implements Serializable {
     private String id;
     private String personelId;
     private EType type;
+    private EState State;
     private LocalDate bSStartingDate;
     private LocalDate bSEndingDate;
     private double bSTotalTime;

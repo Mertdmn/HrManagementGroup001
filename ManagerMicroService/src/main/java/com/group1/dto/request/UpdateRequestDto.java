@@ -13,6 +13,5 @@ public class UpdateRequestDto {
     // photo alıncak
     String address;
     String phone;
-    String personelId;
 
 }

@@ -9,6 +9,7 @@ import com.group1.mapper.AdvanceMapper;
 import com.group1.repository.AdvanceRepository;
 import com.group1.repository.entity.Advance;
 import com.group1.repository.entity.Personel;
+import com.group1.utility.enums.EState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ private final PersonelService personelService;
 
         // SpendingRequestDto'dan Spending entity'sine dönüştürme
         Advance advance = AdvanceMapper.INSTANCE.toAdvance(advanceRequestDto);
-
+        advance.setState(EState.PENDING);
         // Personel entity'sini çekme
         Optional<Personel> personel = personelService.findById(loginUser);
 

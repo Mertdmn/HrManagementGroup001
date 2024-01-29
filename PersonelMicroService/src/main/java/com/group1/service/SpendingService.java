@@ -8,6 +8,7 @@ import com.group1.mapper.SpendingMapper;
 import com.group1.repository.SpendingRepository;
 import com.group1.repository.entity.Personel;
 import com.group1.repository.entity.Spending;
+import com.group1.utility.enums.EState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class SpendingService {
 
             // SpendingRequestDto'dan Spending entity'sine dönüştürme
             Spending spending = SpendingMapper.INSTANCE.toSpending(spendingRequestDto);
-
+            spending.setState(EState.PENDING);
             // Personel entity'sini çekme
             Optional<Personel> personel =personelService.findById(loginUser);
 

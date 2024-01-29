@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PersonelServerApplication {
+public class PersonelMicroServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(PersonelServerApplication.class);
+        SpringApplication.run(PersonelMicroServiceApplication.class);
     }
 }
