@@ -9,6 +9,7 @@ import com.group1.mapper.AdvanceMapper;
 import com.group1.repository.AdvanceRepository;
 import com.group1.repository.entity.Advance;
 import com.group1.repository.entity.Personel;
+import com.group1.utility.JwtTokenManager;
 import com.group1.utility.enums.EState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,25 +22,28 @@ import static com.group1.service.PersonelService.loginUser;
 @RequiredArgsConstructor
 public class AdvanceService {
     private final AdvanceRepository advanceRepository;
-
+private final JwtTokenManager jwtTokenManager;
 private final PersonelService personelService;
 
     public Optional<Advance> createAdvance(AdvanceRequestDto advanceRequestDto) {
 
+        Optional<String> personelId=jwtTokenManager.getIdFromToken(advanceRequestDto.getToken());
+        if (personelId.isEmpty()) {
+            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+        }
 
+        Optional<Personel> personel=personelService.findOptionalById(personelId.get());
+        if (personel.isEmpty()){
+            throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
+        }
         // SpendingRequestDto'dan Spending entity'sine dönüştürme
         Advance advance = AdvanceMapper.INSTANCE.toAdvance(advanceRequestDto);
         advance.setState(EState.PENDING);
         // Personel entity'sini çekme
-        Optional<Personel> personel = personelService.findById(loginUser);
 
         // Eğer personel bulunamazsa, gerekli hata işlemlerini yapabilirsiniz.
-        if (personel == null) {
-            throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
-        }
 
         // Spending entity'sine personel bilgisini set etme
-
         // Diğer işlemleri gerçekleştirme ve avans kaydetme
         return Optional.of(advanceRepository.save(advance));
     }

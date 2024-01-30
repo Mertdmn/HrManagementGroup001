@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface PersonelRepository extends MongoRepository<Personel,String> {
    Optional<Personel> findOptionalByEmailAndPassword(String email, String password);
 
-
+Optional<Personel> findOptionalById(String id);
    Optional<Personel> findById(String id);
    ShowResponseDto findAllBy(ShowResponseDto dto);
 

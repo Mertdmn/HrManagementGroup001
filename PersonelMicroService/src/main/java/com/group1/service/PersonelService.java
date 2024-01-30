@@ -48,6 +48,9 @@ public class PersonelService {
         return personelRepository.findById(id);
     }
 
+    public Optional<Personel> findOptionalById(String id){
+        return personelRepository.findOptionalById(id);
+    }
 
     public Optional<Personel> findByIdFromLoginUser() {
         return personelRepository.findById(loginUser);

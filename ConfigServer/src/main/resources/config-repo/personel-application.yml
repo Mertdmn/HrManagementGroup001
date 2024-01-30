@@ -9,3 +9,11 @@ spring:
       database: PersonelDB
       username: defaultUser
       password: bilge!*123
+      security:
+        user:
+          name: group
+          password: 123456
+jwt:
+  secretkey: ${java11secretkey}
+  issuer: ${java11issuer}
+  audience: ${java11audience}2

@@ -19,5 +19,6 @@ public class AdvanceRequestDto {
     LocalDate date;
     EState state;
     ECurrency currency;
+    String token;
 
 }
