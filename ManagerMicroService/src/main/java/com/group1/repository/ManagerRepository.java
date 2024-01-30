@@ -3,13 +3,13 @@ package com.group1.repository;
 import com.group1.dto.response.ManagerResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.repository.entity.Manager;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface ManagerRepository extends MongoRepository<Manager,String> {
+public interface ManagerRepository extends JpaRepository<Manager,Long> {
     Optional<Manager> findOptionalByEmailAndPassword(String email, String password);
 
     ShowResponseDto findAllBy(ShowResponseDto showResponseDto);

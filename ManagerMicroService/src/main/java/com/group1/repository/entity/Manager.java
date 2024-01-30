@@ -2,22 +2,27 @@ package com.group1.repository.entity;
 
 import com.group1.utility.enums.ERole;
 import com.group1.utility.enums.EState;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document
+@Entity
+@Table(name = "tbl_manager")
 public class Manager {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String secondName;
     private String surname;
