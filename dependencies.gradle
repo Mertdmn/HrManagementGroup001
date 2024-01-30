@@ -43,7 +43,9 @@ ext {
 
             postgresql                 : "org.postgresql:postgresql:$versions.postgresql",
 
-            jwt                        : "com.auth0:java-jwt:$versions.jwt"
+            jwt                        : "com.auth0:java-jwt:$versions.jwt",
+
+            validation                 : 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
 
 
 
