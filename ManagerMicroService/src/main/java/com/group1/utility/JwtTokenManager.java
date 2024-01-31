@@ -4,9 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-
 import com.group1.exception.ErrorType;
-import com.group1.exception.PersonelManagerException;
+import com.group1.exception.ManagerException;
 import com.group1.utility.enums.ERole;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -76,7 +75,7 @@ public class JwtTokenManager {
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+            throw new ManagerException(ErrorType.INVALID_TOKEN);
         }
     }
 
@@ -86,13 +85,13 @@ public class JwtTokenManager {
             JWTVerifier verifier = JWT.require(algorithm).withIssuer(issuer).withAudience(audience).build();
             DecodedJWT decodedJWT = verifier.verify(token);
             if (decodedJWT == null) {
-                throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+                throw new ManagerException(ErrorType.INVALID_TOKEN);
             }
             Long id = decodedJWT.getClaim("id").asLong();
             return Optional.of(id);
         } catch (Exception e) {
             e.getMessage();
-            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+            throw new ManagerException(ErrorType.INVALID_TOKEN);
         }
     }
 
@@ -102,13 +101,13 @@ public class JwtTokenManager {
             JWTVerifier verifier = JWT.require(algorithm).withIssuer(issuer).withAudience(audience).build();
             DecodedJWT decodedJWT = verifier.verify(token);
             if (decodedJWT == null) {
-                throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+                throw new ManagerException(ErrorType.INVALID_TOKEN);
             }
             String role = decodedJWT.getClaim("role").asString();
             return Optional.of(role);
         } catch (Exception e) {
             e.getMessage();
-            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+            throw new ManagerException(ErrorType.INVALID_TOKEN);
         }
     }
 

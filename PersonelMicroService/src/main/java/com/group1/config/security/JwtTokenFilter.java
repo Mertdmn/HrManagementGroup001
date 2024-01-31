@@ -1,4 +1,4 @@
-package com.group1.config;
+package com.group1.config.security;
 
 
 import com.group1.exception.ErrorType;

@@ -5,13 +5,11 @@ import com.group1.dto.request.LoginPersonelRequestDto;
 import com.group1.dto.request.RegisterRequestDto;
 import com.group1.dto.request.UpdatePersonelRequestDto;
 import com.group1.dto.response.PersonelResponseDto;
-import com.group1.dto.response.RegisterResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.repository.entity.Personel;
 import com.group1.service.PersonelService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,12 +27,17 @@ public class PersonelController {
         return ResponseEntity.ok(personelService.login(dto));
     }
     @GetMapping(SHOW)
-    public ResponseEntity<Optional<ShowResponseDto>> show(){
-        return ResponseEntity.ok(personelService.show());
+    public ResponseEntity<Optional<ShowResponseDto>> show(ShowResponseDto dto){
+        return ResponseEntity.ok(personelService.show(dto));
     }
     @PostMapping(UPDATE)
     public ResponseEntity<Void> update(UpdatePersonelRequestDto dto) {
         personelService.update(dto);
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping("/save")
+    public ResponseEntity<Void> save(@RequestBody @Valid RegisterRequestDto dto){
+        Personel personel =   personelService.save(dto);
         return ResponseEntity.ok().build();
     }
 @GetMapping(SHOWDETAILS)

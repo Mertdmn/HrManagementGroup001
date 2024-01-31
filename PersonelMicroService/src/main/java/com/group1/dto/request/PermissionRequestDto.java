@@ -17,6 +17,8 @@ public class PermissionRequestDto {
     LocalDate endingDate;
     int usedPermissionDays;
     String type;
+    String token;
     LocalDate requestDate;
+    LocalDate responseDate;
     EState state;
 }

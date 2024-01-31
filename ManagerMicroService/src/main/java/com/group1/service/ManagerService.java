@@ -1,29 +1,43 @@
 package com.group1.service;
 
-import com.group1.dto.request.LoginManagerRequestDto;
-import com.group1.dto.request.UpdateRequestDto;
-import com.group1.dto.response.ManagerResponseDto;
-import com.group1.dto.response.ShowResponseDto;
+import com.group1.dto.request.RegisterRequestDto;
 import com.group1.exception.ErrorType;
 import com.group1.exception.ManagerException;
 import com.group1.mapper.ManagerMapper;
+import com.group1.rabbitmq.model.RegisterModel;
+import com.group1.rabbitmq.producer.RegisterProducer;
 import com.group1.repository.ManagerRepository;
 import com.group1.repository.entity.Manager;
-import com.group1.utility.enums.ERole;
+import com.group1.utility.JwtTokenManager;
+import com.group1.utility.enums.EState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ManagerService {
     private final ManagerRepository managerRepository;
-    public static String loginUser="";
+    private final JwtTokenManager jwtTokenManager;
+    private final RegisterProducer registerProducer;
 
-    public Optional<Manager> findById(String id){
-        return managerRepository.findById(id);
+
+    public void register(RegisterRequestDto dto){
+        managerRepository.findOptionalByEmailAndPassword(dto.getEmail(),dto.getPassword())
+                .ifPresent(manager->{
+                    throw new ManagerException(ErrorType.EMAIL_NOT_FOUND);
+                });
+
+        Manager manager = ManagerMapper.INSTANCE.fromDto(dto);
+        manager.setState(EState.CONFIRMED);
+        managerRepository.save(manager);
+        registerProducer.sendNewUser(RegisterModel.builder()
+                .managerId(manager.getId())
+                .email(manager.getEmail())
+                .password(manager.getPassword())
+                .build());
     }
+    /*
+
     public Optional<ShowResponseDto> show() {
         Manager manager= managerRepository.findById(loginUser)
                 .orElseThrow(() -> new ManagerException(ErrorType.MANAGER_NOT_FOUND));
@@ -67,4 +81,6 @@ public class ManagerService {
             return true;
         }
     }
+    */
+
 }

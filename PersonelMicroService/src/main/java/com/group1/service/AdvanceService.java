@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static com.group1.service.PersonelService.loginUser;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +26,7 @@ private final PersonelService personelService;
 
     public Optional<Advance> createAdvance(AdvanceRequestDto advanceRequestDto) {
 
-        Optional<String> personelId=jwtTokenManager.getIdFromToken(advanceRequestDto.getToken());
+        Optional<Long> personelId=jwtTokenManager.getIdFromToken(advanceRequestDto.getToken());
         if (personelId.isEmpty()) {
             throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
         }

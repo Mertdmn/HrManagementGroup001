@@ -14,9 +14,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class RegisterRequestDto {
     @Email
-    String email;
+    private String email;
     @NotBlank
     @Size(min =8, max=32, message = "Sifre minimum 8 maksimum 32 karakterden olusmalidir...")
-    String password;
-    Long managerId;
+    private String password;
 }

@@ -24,5 +24,6 @@ public class SpendingRequestDto {
     ECurrency currency;
     String file;
     String description;
+    String token;
 
 }

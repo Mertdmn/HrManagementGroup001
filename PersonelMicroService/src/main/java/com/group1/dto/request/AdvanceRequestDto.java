@@ -17,6 +17,7 @@ import java.time.LocalDate;
 public class AdvanceRequestDto {
     double amount;
     LocalDate date;
+    LocalDate responseDate;
     EState state;
     ECurrency currency;
     String token;

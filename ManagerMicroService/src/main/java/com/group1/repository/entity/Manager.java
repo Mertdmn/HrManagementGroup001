@@ -27,6 +27,7 @@ public class Manager {
     private String secondName;
     private String surname;
     private String secondSurname;
+    private String activationCode;
     private String TCNo;
     private String email;
     private String password;

@@ -16,5 +16,7 @@ public class ShiftRequestDto {
     EType type;
     LocalDate bSStartingDate;
     LocalDate bSEndingDate;
+    LocalDate responseDate;
     double bSTotalTime;
+    String token;
 }

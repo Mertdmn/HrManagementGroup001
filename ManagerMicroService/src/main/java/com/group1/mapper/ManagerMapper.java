@@ -1,8 +1,12 @@
 package com.group1.mapper;
 
+import com.group1.dto.request.RegisterRequestDto;
+import com.group1.dto.response.RegisterResponseDto;
 import com.group1.dto.response.ShowResponseDto;
+import com.group1.rabbitmq.model.RegisterModel;
 import com.group1.repository.entity.Manager;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -11,5 +15,12 @@ public interface ManagerMapper {
     ManagerMapper INSTANCE = Mappers.getMapper(ManagerMapper.class);
     ShowResponseDto toShow(final Manager manager);
     Manager toShowDetails(final Manager manager);
+    RegisterRequestDto toRegister(final Manager manager);
+    Manager fromRegisterRequestToManager(RegisterRequestDto dto);
+    @Mapping(source = "id", target ="managerId")
+    RegisterModel fromManagerToRegisterModel(Manager manager);
 
+    RegisterResponseDto fromManagerToRegisterResponse(Manager manager);
+
+    Manager fromDto(RegisterRequestDto dto);
 }

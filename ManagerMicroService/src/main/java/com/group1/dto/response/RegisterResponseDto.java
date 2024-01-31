@@ -9,14 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShowResponseDto {
-    String name;
-    String surname;
-    String email;
-    String phone;
-    String photo;
-    String token;
-    String department;
-    String address;
-    String title;
+public class RegisterResponseDto {
+    boolean isRegister;
+    String message;
 }

@@ -1,4 +1,5 @@
-package com.group1.config;
+package com.group1.config.security;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,12 +11,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class PersonelServiceSecurityConfig {
-
     @Bean
     JwtTokenFilter getJwtTokenFilter(){
         return new JwtTokenFilter();
     }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf().disable(); //cross-site-request-forgery
@@ -25,5 +24,4 @@ public class PersonelServiceSecurityConfig {
         httpSecurity.addFilterBefore(getJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
-
 }

@@ -15,5 +15,8 @@ public class BreaksRequestDto {
     EType type;
     LocalDate breakStartingDate;
     LocalDate breakEndingDate;
+    LocalDate responseDate;
     double BSTotalTime;
+    String token;
+
 }

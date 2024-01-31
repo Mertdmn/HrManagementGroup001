@@ -1,4 +1,4 @@
-package com.group1.config;
+package com.group1.config.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

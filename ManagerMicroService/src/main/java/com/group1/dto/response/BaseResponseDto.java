@@ -1,4 +1,4 @@
-package com.group1.dto.request;
+package com.group1.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UpdatePersonelRequestDto {
-    // photo alıncak
-    String address;
-    String phone;
-    String token;
-
+public class BaseResponseDto<T> {
+    int responseCode;
+    T data;
 }

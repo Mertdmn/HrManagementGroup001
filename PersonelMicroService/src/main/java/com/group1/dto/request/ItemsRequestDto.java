@@ -15,7 +15,8 @@ import java.time.LocalDate;
 public class ItemsRequestDto {
     LocalDate startingDate;
     LocalDate endingDate;
+    LocalDate responseDate;
     String name;
     EState State;
-
+    String token;
 }

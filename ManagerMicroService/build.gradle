@@ -10,4 +10,6 @@ dependencies {
     implementation libs.validation
     implementation libs.jwt
     implementation libs.springBootSecurity
+    implementation libs.springBootAmqp
+
 }

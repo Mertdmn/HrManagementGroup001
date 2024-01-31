@@ -7,13 +7,13 @@ import com.group1.mapper.ItemsMapper;
 import com.group1.repository.ItemsRepository;
 import com.group1.repository.entity.Items;
 import com.group1.repository.entity.Personel;
+import com.group1.utility.JwtTokenManager;
 import com.group1.utility.enums.EState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static com.group1.service.PersonelService.loginUser;
 
 @Service
 @RequiredArgsConstructor
@@ -21,12 +21,16 @@ public class ItemsService {
 
     private final ItemsRepository itemsRepository;
     private final PersonelService personelService;
-
+    private final JwtTokenManager jwtTokenManager;
 
     public Optional<Items> createItems(ItemsRequestDto dto) {
+        Optional<Long> personelId=jwtTokenManager.getIdFromToken(dto.getToken());
+        if (personelId.isEmpty()) {
+            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+        }
         Items items = ItemsMapper.INSTANCE.fromCreateItemsRequestDto(dto);
         items.setState(EState.PENDING);
-        Optional<Personel> personel = personelService.findById(loginUser);
+        Optional<Personel> personel = personelService.findOptionalById(personelId.get());
         if (personel == null) {
             throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
         }

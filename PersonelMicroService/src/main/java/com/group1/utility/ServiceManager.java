@@ -1,6 +1,5 @@
 package com.group1.utility;
 
-import com.group1.repository.entity.BaseEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -4,16 +4,16 @@ package com.group1.repository;
 import com.group1.dto.response.PersonelResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.repository.entity.Personel;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface PersonelRepository extends MongoRepository<Personel,String> {
+public interface PersonelRepository extends JpaRepository<Personel,Long> {
    Optional<Personel> findOptionalByEmailAndPassword(String email, String password);
 
-Optional<Personel> findOptionalById(String id);
+Optional<Personel> findOptionalById(Long id);
    Optional<Personel> findById(String id);
    ShowResponseDto findAllBy(ShowResponseDto dto);
 
@@ -24,5 +24,5 @@ Optional<Personel> findOptionalById(String id);
            "p.dateOfBirth, p.hiringDate, p.dismissalDate, p.department, " +
            "p.address, p.title, p.salary, p.role, p.state) " +
            "FROM Personel p WHERE p.id = :personelId")
-   PersonelResponseDto findPersonelDetails(@Param("personelId") String personelId);
+   PersonelResponseDto findPersonelDetails(@Param("personelId") Long personelId);
 }

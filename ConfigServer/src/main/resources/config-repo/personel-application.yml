@@ -2,17 +2,27 @@ server:
   port: 9090
 
 spring:
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: PersonelDB
-      username: defaultUser
-      password: bilge!*123
-      security:
-        user:
-          name: group
-          password: 123456
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: root
+    url: jdbc:postgresql://localhost:5432/PersonelDB
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+  security:
+    user:
+      name: group
+      password: 123456
+
+  rabbitmq:
+    exchange-auth: auth-exchange
+    register-key: register-key
+    queue-register: register-queue
+    register-mail-key: register-mail-key
+    register-mail-queue: register-mail-queue
+
 jwt:
   secretkey: ${java11secretkey}
   issuer: ${java11issuer}

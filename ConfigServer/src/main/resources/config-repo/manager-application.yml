@@ -7,3 +7,12 @@ spring:
     username: postgres
     password: root
     url: jdbc:postgresql://localhost:5432/ManagerDB
+  jpa:
+    hibernate:
+      ddl-auto: create
+  rabbitmq:
+    exchange-auth: auth-exchange
+    register-key: register-key
+    queue-register: register-queue
+    register-mail-key: register-mail-key
+    register-mail-queue: register-mail-queue

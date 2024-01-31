@@ -2,9 +2,7 @@ package com.group1.repository;
 
 
 import com.group1.repository.entity.Items;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-
-public interface ItemsRepository extends MongoRepository<Items,String> {
+public interface ItemsRepository extends JpaRepository<Items,Long> {
 }
