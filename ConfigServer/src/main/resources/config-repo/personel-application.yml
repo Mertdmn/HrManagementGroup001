@@ -9,19 +9,19 @@ spring:
     url: jdbc:postgresql://localhost:5432/PersonelDB
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
   security:
     user:
       name: group
       password: 123456
 
-  rabbitmq:
-    exchange-auth: auth-exchange
-    register-key: register-key
-    queue-register: register-queue
-    register-mail-key: register-mail-key
-    register-mail-queue: register-mail-queue
+rabbitmq:
+  exchange-auth: auth-exchange
+  register-key: register-key
+  queue-register: register-queue
+  register-mail-key: register-mail-key
+  register-mail-queue: register-mail-queue
 
 jwt:
   secretkey: ${java11secretkey}

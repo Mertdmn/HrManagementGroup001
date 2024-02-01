@@ -3,7 +3,6 @@ package com.group1.service;
 
 import com.group1.dto.request.LoginPersonelRequestDto;
 import com.group1.dto.request.PersonelSaveRequestDto;
-import com.group1.dto.request.RegisterRequestDto;
 import com.group1.dto.request.UpdatePersonelRequestDto;
 import com.group1.dto.response.PersonelResponseDto;
 import com.group1.dto.response.ShowResponseDto;
@@ -17,7 +16,6 @@ import com.group1.utility.enums.ERole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -57,26 +55,23 @@ public class PersonelService {
 
 
     // personel id bulup spending / advance service üzerinde çağırdık
-    public Optional<Personel> findById(String id){
-        return personelRepository.findById(id);
-    }
 
     public Optional<Personel> findOptionalById(Long id){
         return personelRepository.findOptionalById(id);
     }
 
 
-    public Optional<ShowResponseDto> show(ShowResponseDto showResponseDto) {
-        Optional<Long> personelId=jwtTokenManager.getIdFromToken(showResponseDto.getToken());
-        if (personelId.isEmpty()) {
-            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
-        }
-        Personel personel = personelRepository.findById(personelId.get())
-                .orElseThrow(() -> new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND));
-        showResponseDto=PersonelMapper.INSTANCE.toShow(personel);
-
-        return Optional.ofNullable(personelRepository.findAllBy(showResponseDto));
-    }
+//    public Optional<ShowResponseDto> show(ShowResponseDto showResponseDto) {
+//        Optional<Long> personelId=jwtTokenManager.getIdFromToken(showResponseDto.getToken());
+//        if (personelId.isEmpty()) {
+//            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+//        }
+//        Personel personel = personelRepository.findById(personelId.get())
+//                .orElseThrow(() -> new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND));
+//        showResponseDto=PersonelMapper.INSTANCE.toShow(personel);
+//
+//        return Optional.ofNullable(personelRepository.findAllBy(showResponseDto));
+//    }
 
     public void update(UpdatePersonelRequestDto dto) {
         Optional<Long> personelId=jwtTokenManager.getIdFromToken(dto.getToken());
@@ -101,16 +96,16 @@ public class PersonelService {
         }
     }
 
-    public Optional<PersonelResponseDto> showDetails() {
-        PersonelResponseDto personelResponseDto=new PersonelResponseDto();
-        Optional<Long> personelId=jwtTokenManager.getIdFromToken(personelResponseDto.getToken());
-        if (personelId.isEmpty()) {
-            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
-        }
-
-         personelResponseDto = personelRepository.findPersonelDetails(personelId.get());
-        return Optional.ofNullable(personelResponseDto);
-    }
+//    public Optional<PersonelResponseDto> showDetails() {
+//        PersonelResponseDto personelResponseDto=new PersonelResponseDto();
+//        Optional<Long> personelId=jwtTokenManager.getIdFromToken(personelResponseDto.getToken());
+//        if (personelId.isEmpty()) {
+//            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+//        }
+//
+//         personelResponseDto = personelRepository.findPersonelDetails(personelId.get());
+//        return Optional.ofNullable(personelResponseDto);
+//    }
 
 
 }

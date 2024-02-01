@@ -1,10 +1,7 @@
 package com.group1.controller;
 
-import com.group1.constants.RestApiUrls;
 import com.group1.dto.request.PermissionRequestDto;
-import com.group1.dto.request.SpendingRequestDto;
 import com.group1.repository.entity.Permissions;
-import com.group1.repository.entity.Spending;
 import com.group1.service.PermissionsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -8,7 +8,6 @@ import com.group1.rabbitmq.model.RegisterModel;
 import com.group1.rabbitmq.producer.RegisterProducer;
 import com.group1.repository.ManagerRepository;
 import com.group1.repository.entity.Manager;
-import com.group1.utility.JwtTokenManager;
 import com.group1.utility.enums.EState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,10 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ManagerService {
     private final ManagerRepository managerRepository;
-    private final JwtTokenManager jwtTokenManager;
     private final RegisterProducer registerProducer;
-
-
     public void register(RegisterRequestDto dto){
         managerRepository.findOptionalByEmailAndPassword(dto.getEmail(),dto.getPassword())
                 .ifPresent(manager->{

@@ -4,7 +4,6 @@ buildscript {
     }
 }
 dependencies {
-    implementation libs.springCloudConfig
     implementation libs.springBootDataJpa
     implementation libs.swaggerui
     implementation libs.validation
@@ -12,5 +11,6 @@ dependencies {
     implementation libs.springBootSecurity
     implementation libs.springBootAmqp
     implementation libs.springCloudOpenFeign
-
+    implementation libs.postgresql
+    implementation libs.springCloudConfigClient
 }

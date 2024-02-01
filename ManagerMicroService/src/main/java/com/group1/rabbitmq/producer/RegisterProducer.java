@@ -9,13 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class RegisterProducer {
-    @Value("${rabbitmq.exchange-auth}")
-    private String directExchange;
 
-    @Value("${rabbitmq.register-key}")
-    private String registerBindingKey;
     private final RabbitTemplate rabbitTemplate;
     public void sendNewUser(RegisterModel model){
-        rabbitTemplate.convertAndSend(directExchange,registerBindingKey,model);
+        rabbitTemplate.convertAndSend("exchange-auth","key-auth",model);
     }
 }

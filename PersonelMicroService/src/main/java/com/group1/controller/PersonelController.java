@@ -2,7 +2,7 @@ package com.group1.controller;
 
 
 import com.group1.dto.request.LoginPersonelRequestDto;
-import com.group1.dto.request.RegisterRequestDto;
+import com.group1.dto.request.PersonelSaveRequestDto;
 import com.group1.dto.request.UpdatePersonelRequestDto;
 import com.group1.dto.response.PersonelResponseDto;
 import com.group1.dto.response.ShowResponseDto;
@@ -26,22 +26,22 @@ public class PersonelController {
     public ResponseEntity<Boolean> login(@RequestBody LoginPersonelRequestDto dto) {
         return ResponseEntity.ok(personelService.login(dto));
     }
-    @GetMapping(SHOW)
-    public ResponseEntity<Optional<ShowResponseDto>> show(ShowResponseDto dto){
-        return ResponseEntity.ok(personelService.show(dto));
-    }
+//    @GetMapping(SHOW)
+//    public ResponseEntity<Optional<ShowResponseDto>> show(ShowResponseDto dto){
+//        return ResponseEntity.ok(personelService.show(dto));
+//    }
     @PostMapping(UPDATE)
     public ResponseEntity<Void> update(UpdatePersonelRequestDto dto) {
         personelService.update(dto);
         return ResponseEntity.ok().build();
     }
     @PostMapping("/save")
-    public ResponseEntity<Void> save(@RequestBody @Valid RegisterRequestDto dto){
+    public ResponseEntity<Void> save(@RequestBody @Valid PersonelSaveRequestDto dto){
         Personel personel =   personelService.save(dto);
         return ResponseEntity.ok().build();
     }
-@GetMapping(SHOWDETAILS)
-public ResponseEntity<Optional<PersonelResponseDto>> showDetails(){
-    return ResponseEntity.ok(personelService.showDetails());
-}
+//@GetMapping(SHOWDETAILS)
+//public ResponseEntity<Optional<PersonelResponseDto>> showDetails(){
+//    return ResponseEntity.ok(personelService.showDetails());
+//}
 }

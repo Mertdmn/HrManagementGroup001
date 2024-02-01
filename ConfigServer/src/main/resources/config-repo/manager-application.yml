@@ -2,6 +2,11 @@ server:
   port: 9091
 
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+
+
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
@@ -9,10 +14,4 @@ spring:
     url: jdbc:postgresql://localhost:5432/ManagerDB
   jpa:
     hibernate:
-      ddl-auto: create
-  rabbitmq:
-    exchange-auth: auth-exchange
-    register-key: register-key
-    queue-register: register-queue
-    register-mail-key: register-mail-key
-    register-mail-queue: register-mail-queue
+      ddl-auto: create-drop
