@@ -26,14 +26,12 @@ public class ManagerService {
                 .ifPresent(manager->{
                     throw new ManagerException(ErrorType.EMAIL_NOT_FOUND);
                 });
-
         Manager manager = ManagerMapper.INSTANCE.fromDto(dto);
         manager.setState(EState.CONFIRMED);
         managerRepository.save(manager);
         registerProducer.sendNewUser(RegisterModel.builder()
                 .managerId(manager.getId())
                 .email(manager.getEmail())
-                .password(manager.getPassword())
                 .build());
     }
     /*

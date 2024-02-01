@@ -1,17 +1,15 @@
-package com.group1.rabbitmq.model;
+package com.group1.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class RegisterModel implements Serializable {
+public class PersonelSaveRequestDto {
     Long managerId;
     String email;
 }

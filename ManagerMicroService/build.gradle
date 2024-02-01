@@ -11,5 +11,5 @@ dependencies {
     implementation libs.jwt
     implementation libs.springBootSecurity
     implementation libs.springBootAmqp
-
+    implementation libs.springCloudOpenFeign
 }

@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "manager-manager", url = "http://localhost:9091/manager")
-public interface ManagerManager {
+@FeignClient(name = "personel-manager", url = "http://localhost:9090/personel")
+public interface PersonelManager {
     @PostMapping("/save")
     ResponseEntity<Void> save(@RequestBody RegisterRequestDto dto);
 }

@@ -2,22 +2,19 @@ package com.group1.service;
 
 
 import com.group1.dto.request.LoginPersonelRequestDto;
+import com.group1.dto.request.PersonelSaveRequestDto;
 import com.group1.dto.request.RegisterRequestDto;
 import com.group1.dto.request.UpdatePersonelRequestDto;
 import com.group1.dto.response.PersonelResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.exception.ErrorType;
 import com.group1.exception.PersonelManagerException;
-import com.group1.manager.ManagerManager;
 import com.group1.mapper.PersonelMapper;
-import com.group1.rabbitmq.model.RegisterModel;
 import com.group1.repository.PersonelRepository;
 import com.group1.repository.entity.Personel;
 import com.group1.utility.JwtTokenManager;
 import com.group1.utility.enums.ERole;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -28,7 +25,6 @@ import java.util.Optional;
 public class PersonelService {
     private final PersonelRepository personelRepository;
     private final JwtTokenManager jwtTokenManager;
-    private final ManagerManager manager;
     public Boolean login(LoginPersonelRequestDto dto) {
         Personel personel1=new Personel();
         personel1.setEmail("abc@hotmail.com");
@@ -41,9 +37,8 @@ public class PersonelService {
             return true;
         }
     }
-    public Personel save(RegisterRequestDto dto){
+    public Personel save(PersonelSaveRequestDto dto){
         Personel result = personelRepository.save(PersonelMapper.INSTANCE.fromDto(dto));
-        manager.save(PersonelMapper.INSTANCE.toRegisterRequestDto(result));
         return result;
     }
 //    public Optional<Personel> register(RegisterRequestDto dto){
