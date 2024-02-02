@@ -30,6 +30,7 @@ public class Personel {
     String phone;
     String photo;
     String company;
+    Long imageId;
     String placeOfBirth;
     LocalDate dateOfBirth;
     LocalDate hiringDate;

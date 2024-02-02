@@ -26,4 +26,13 @@ rabbitmq:
 jwt:
   secretkey: ${java11secretkey}
   issuer: ${java11issuer}
-  audience: ${java11audience}2
+  audience: ${java11audience}
+
+servlet:
+  multipart:
+    max-file-size: 10485760
+    max-request-size: 20485760
+
+imgur:
+  client:
+    id: 123
