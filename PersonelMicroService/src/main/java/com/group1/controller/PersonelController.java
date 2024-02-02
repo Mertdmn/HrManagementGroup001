@@ -1,9 +1,9 @@
 package com.group1.controller;
 
 
-import com.group1.dto.request.LoginPersonelRequestDto;
-import com.group1.dto.request.PersonelSaveRequestDto;
-import com.group1.dto.request.UpdatePersonelRequestDto;
+import com.group1.dto.request.*;
+import com.group1.dto.response.BaseResponseDto;
+import com.group1.dto.response.LoginResponseDto;
 import com.group1.dto.response.PersonelResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.repository.entity.Personel;
@@ -23,13 +23,20 @@ public class PersonelController {
     private final PersonelService personelService;
 
     @PostMapping(LOGIN)
-    public ResponseEntity<Boolean> login(@RequestBody LoginPersonelRequestDto dto) {
-        return ResponseEntity.ok(personelService.login(dto));
+    public ResponseEntity<BaseResponseDto<LoginResponseDto>> login(@RequestBody LoginPersonelRequestDto dto) {
+        String token=personelService.login(dto);
+        return ResponseEntity.ok(BaseResponseDto.<LoginResponseDto>builder()
+                .responseCode(200)
+                .data(LoginResponseDto.builder()
+                        .isLogin(true)
+                        .token(token)
+                        .build())
+                .build());
     }
-//    @GetMapping(SHOW)
-//    public ResponseEntity<Optional<ShowResponseDto>> show(ShowResponseDto dto){
-//        return ResponseEntity.ok(personelService.show(dto));
-//    }
+    @GetMapping(SHOW)
+    public ResponseEntity<ShowResponseDto> showPersonelByToken(GetPersonelByTokenRequestDto dto){
+        return ResponseEntity.ok(personelService.showPersonelByToken(dto));
+    }
     @PostMapping(UPDATE)
     public ResponseEntity<Void> update(UpdatePersonelRequestDto dto) {
         personelService.update(dto);
@@ -40,8 +47,8 @@ public class PersonelController {
         Personel personel =   personelService.save(dto);
         return ResponseEntity.ok().build();
     }
-//@GetMapping(SHOWDETAILS)
-//public ResponseEntity<Optional<PersonelResponseDto>> showDetails(){
-//    return ResponseEntity.ok(personelService.showDetails());
-//}
+@GetMapping(SHOWDETAILS)
+public ResponseEntity<PersonelResponseDto> showDetails(GetPersonelDetailsByTokenRequestDto dto){
+    return ResponseEntity.ok(personelService.showDetailsPersonelByToken(dto));
+}
 }

@@ -1,7 +1,6 @@
 package com.group1.repository;
 
 
-import com.group1.dto.response.PersonelResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.repository.entity.Personel;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,9 +15,8 @@ public interface PersonelRepository extends JpaRepository<Personel,Long> {
 Optional<Personel> findOptionalById(Long id);
 
 //   @Query("SELECT new com.group1.dto.response.ShowResponseDto(p.name,p.surname,p.email,p.phone," +
-//           "p.photo,p.token,p.department,p.address,p.title FROM Personel p WHERE p.id = :personelId")
-//   ShowResponseDto findAllByPersonelId(@Param("personelId") ShowResponseDto dto);
-
+//           "p.photo,p.token,p.department,p.address,p.title) FROM Personel p WHERE p.id = :personelId")
+//   Optional<Personel> findByPersonelId(@Param("personelId") Long id);
 //   @Query("SELECT new com.group1.dto.response.PersonelResponseDto(" +
 //           "p.name, p.secondName, p.surname, p.secondSurname, p.TCNo, " +
 //           "p.email, p.phone, p.photo, p.company, p.placeOfBirth, " +

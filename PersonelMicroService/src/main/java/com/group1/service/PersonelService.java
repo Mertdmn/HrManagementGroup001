@@ -1,9 +1,7 @@
 package com.group1.service;
 
 
-import com.group1.dto.request.LoginPersonelRequestDto;
-import com.group1.dto.request.PersonelSaveRequestDto;
-import com.group1.dto.request.UpdatePersonelRequestDto;
+import com.group1.dto.request.*;
 import com.group1.dto.response.PersonelResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.exception.ErrorType;
@@ -23,55 +21,49 @@ import java.util.Optional;
 public class PersonelService {
     private final PersonelRepository personelRepository;
     private final JwtTokenManager jwtTokenManager;
-    public Boolean login(LoginPersonelRequestDto dto) {
-        Personel personel1=new Personel();
-        personel1.setEmail("abc@hotmail.com");
-        personel1.setPassword("123456");
-        personelRepository.save(personel1);
+    public String login(LoginPersonelRequestDto dto) {
         Optional<Personel> personel=personelRepository.findOptionalByEmailAndPassword(dto.getEmail(),dto.getPassword());
         if (personel.isEmpty()||personel.get().getRole()== ERole.DISMISSED){
            throw new PersonelManagerException(ErrorType.LOGIN_ERROR);
-        }else {
-            return true;
         }
+        Optional<String> token=jwtTokenManager.createToken(personel.get().getId());
+        if (token.isEmpty()){
+        throw new PersonelManagerException(ErrorType.TOKEN_NOT_CREATED);
+        }
+        return token.get();
     }
     public Personel save(PersonelSaveRequestDto dto){
         Personel result = personelRepository.save(PersonelMapper.INSTANCE.fromDto(dto));
         return result;
     }
-//    public Optional<Personel> register(RegisterRequestDto dto){
-//        String token=jwtTokenManager.createToken()
-//        Optional<Long> personelId=jwtTokenManager.getIdFromToken(dto.getToken());
-//        if (personelId.isEmpty()) {
-//            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
-//        }
-//        Optional<Personel> personel=personelRepository.findOptionalById(personelId.get());
-//        personel= Optional.of(personelRepository.save(PersonelMapper.INSTANCE.fromDto(dto)));
-//        if (personel==null){
-//            throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
-//        }
-//        return personel;
-//    }
-
-
-    // personel id bulup spending / advance service üzerinde çağırdık
 
     public Optional<Personel> findOptionalById(Long id){
         return personelRepository.findOptionalById(id);
     }
 
 
-//    public Optional<ShowResponseDto> show(ShowResponseDto showResponseDto) {
-//        Optional<Long> personelId=jwtTokenManager.getIdFromToken(showResponseDto.getToken());
-//        if (personelId.isEmpty()) {
-//            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
-//        }
-//        Personel personel = personelRepository.findById(personelId.get())
-//                .orElseThrow(() -> new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND));
-//        showResponseDto=PersonelMapper.INSTANCE.toShow(personel);
-//
-//        return Optional.ofNullable(personelRepository.findAllBy(showResponseDto));
-//    }
+    public ShowResponseDto showPersonelByToken(GetPersonelByTokenRequestDto getPersonelByTokenRequestDto) {
+        Optional<Long> personelId=jwtTokenManager.getIdFromToken(getPersonelByTokenRequestDto.getToken());
+        if (personelId.isEmpty()) {
+            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+        }
+        Optional<Personel> personel=personelRepository.findOptionalById(personelId.get());
+        if (personel.isEmpty()) {
+            throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
+        }
+        return PersonelMapper.INSTANCE.toShow(personel.get());
+    }
+    public PersonelResponseDto showDetailsPersonelByToken(GetPersonelDetailsByTokenRequestDto getPersonelByTokenRequestDto) {
+        Optional<Long> personelId=jwtTokenManager.getIdFromToken(getPersonelByTokenRequestDto.getToken());
+        if (personelId.isEmpty()) {
+            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+        }
+        Optional<Personel> personel=personelRepository.findOptionalById(personelId.get());
+        if (personel.isEmpty()) {
+            throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
+        }
+        return PersonelMapper.INSTANCE.toShowDetails(personel.get());
+    }
 
     public void update(UpdatePersonelRequestDto dto) {
         Optional<Long> personelId=jwtTokenManager.getIdFromToken(dto.getToken());
@@ -88,8 +80,6 @@ public class PersonelService {
 
             existingPersonel.setPhone(dto.getPhone());
             existingPersonel.setAddress(dto.getAddress());
-
-            // Güncellenmiş entity'yi kaydet
             personelRepository.save(existingPersonel);
         } else {
             throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);

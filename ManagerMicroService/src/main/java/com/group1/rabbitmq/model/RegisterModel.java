@@ -14,4 +14,5 @@ import java.io.Serializable;
 public class RegisterModel implements Serializable {
     Long managerId;
     String email;
+
 }
