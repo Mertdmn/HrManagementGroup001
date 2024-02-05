@@ -30,6 +30,7 @@ public class ManagerService {
                 .email(manager.getEmail())
                 .build());
     }
+
     /*
 
     public Optional<ShowResponseDto> show() {

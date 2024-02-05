@@ -7,6 +7,7 @@ import com.group1.dto.response.BaseResponseDto;
 import com.group1.dto.response.ManagerResponseDto;
 import com.group1.dto.response.RegisterResponseDto;
 import com.group1.dto.response.ShowResponseDto;
+import com.group1.repository.entity.Manager;
 import com.group1.service.ManagerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -51,6 +52,5 @@ public class ManagerController {
                         .build())
                 .build());
     }
-
 }
 

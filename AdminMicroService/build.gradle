@@ -8,4 +8,5 @@ dependencies {
     implementation libs.springBootDataJpa
     implementation libs.swaggerui
     implementation libs.validation
+    implementation libs.postgresql
 }
