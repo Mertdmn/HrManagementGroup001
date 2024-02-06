@@ -12,7 +12,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class RegisterModel implements Serializable {
-    Long managerId;
     String email;
+    Long managerId;
+
 
 }

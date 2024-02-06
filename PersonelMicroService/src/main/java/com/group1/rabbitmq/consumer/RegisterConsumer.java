@@ -16,7 +16,7 @@ public class RegisterConsumer {
 
     private final PersonelService personelService;
 
-    @RabbitListener(queues = "${rabbitmq.queue-register}") //register-queue
+    @RabbitListener(queues = "queue-manager-create-personel") //register-queue
     public void createNewPersonel(RegisterModel model){
         System.out.println("Kuyruk dinlendi gelen kayıt."+ model.toString());
         personelService.save(PersonelSaveRequestDto.builder()

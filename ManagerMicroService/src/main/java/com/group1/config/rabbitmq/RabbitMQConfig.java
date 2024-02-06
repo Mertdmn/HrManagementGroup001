@@ -10,15 +10,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    /**
-     * 1. Adım gerekli tanımlamalar,
-     * 2. Excahange Türü seçimi
-     * 3. Kuyruk oluşturma
-     * 4. Kuyruk ile Exchange i bir birine bağlama
-     */
-    private final String EXCHANGE_AUTH = "exchange-auth";
-    private final String BIDING_KEY = "key-auth";
-    private final String AUTH_QUEUE = "queue-auth-create-user";
+    private final String EXCHANGE_AUTH = "exchange-manager";
+    private final String BIDING_KEY = "key-manager";
+    private final String AUTH_QUEUE = "queue-manager-create-personel";
     @Bean
     DirectExchange directExchange(){
         return new DirectExchange(EXCHANGE_AUTH);

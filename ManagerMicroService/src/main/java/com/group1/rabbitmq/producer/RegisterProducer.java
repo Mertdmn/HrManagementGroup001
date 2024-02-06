@@ -12,6 +12,6 @@ public class RegisterProducer {
 
     private final RabbitTemplate rabbitTemplate;
     public void sendNewUser(RegisterModel model){
-        rabbitTemplate.convertAndSend("exchange-auth","key-auth",model);
+        rabbitTemplate.convertAndSend("exchange-manager","key-manager",model);
     }
 }
