@@ -23,6 +23,7 @@ public class PersonelController {
     private final PersonelService personelService;
 
     @PostMapping(LOGIN)
+    @CrossOrigin("*")
     public ResponseEntity<BaseResponseDto<LoginResponseDto>> login(@RequestBody LoginPersonelRequestDto dto) {
         String token=personelService.login(dto);
         return ResponseEntity.ok(BaseResponseDto.<LoginResponseDto>builder()

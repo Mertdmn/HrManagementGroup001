@@ -2,16 +2,21 @@ server:
   port: 9091
 
 spring:
+  amqp:
+    deserialization:
+      trust:
+        all: true
   rabbitmq:
     host: localhost
     port: 5672
-
+    username: BilgeAdmin
+    password: Aa123456
 
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: root
-    url: jdbc:postgresql://localhost:5432/ManagerDB
+    url: jdbc:postgresql://localhost:5432/PersonelDB
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update

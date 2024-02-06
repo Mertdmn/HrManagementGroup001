@@ -6,11 +6,8 @@ buildscript {
 dependencies {
     implementation libs.httpClient
     implementation libs.httpMime
-    implementation libs.springBootStarterWeb
     implementation libs.springBootDataJpa
-    implementation libs.swaggerui
     implementation libs.validation
-    implementation libs.jwt
     implementation libs.springBootAmqp
     implementation libs.springCloudOpenFeign
     implementation libs.postgresql

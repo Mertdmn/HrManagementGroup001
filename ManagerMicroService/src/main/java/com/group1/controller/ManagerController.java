@@ -41,7 +41,8 @@ public class ManagerController {
 //    public ResponseEntity<Boolean> login(@RequestBody LoginManagerRequestDto dto) {
 //        return ResponseEntity.ok(managerService.login(dto));
 //    }
-    @PostMapping(REGISTER)
+@PostMapping(REGISTER)
+@CrossOrigin("*")
     public ResponseEntity<BaseResponseDto<RegisterResponseDto>> register(@RequestBody @Valid RegisterRequestDto dto){
         managerService.register(dto);
         return ResponseEntity.ok(BaseResponseDto.<RegisterResponseDto>builder()

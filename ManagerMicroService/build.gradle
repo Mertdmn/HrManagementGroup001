@@ -5,9 +5,7 @@ buildscript {
 }
 dependencies {
     implementation libs.springBootDataJpa
-    implementation libs.swaggerui
     implementation libs.validation
-    implementation libs.jwt
     implementation libs.springBootAmqp
     implementation libs.springCloudOpenFeign
     implementation libs.postgresql
