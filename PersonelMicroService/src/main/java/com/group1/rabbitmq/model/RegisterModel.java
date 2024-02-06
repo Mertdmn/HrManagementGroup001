@@ -11,7 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RegisterModel implements Serializable {
-    Long managerId;
+public class RegisterModel implements Serializable{
     String email;
+    String password;
 }

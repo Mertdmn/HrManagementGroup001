@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class PersonelSaveRequestDto {
     String email;
     Long managerId;
+    String password;
 }

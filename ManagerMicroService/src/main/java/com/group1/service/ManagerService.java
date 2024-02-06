@@ -3,6 +3,7 @@ package com.group1.service;
 import com.group1.dto.request.RegisterRequestDto;
 import com.group1.exception.ErrorType;
 import com.group1.exception.ManagerException;
+import com.group1.manager.PersonelManager;
 import com.group1.mapper.ManagerMapper;
 import com.group1.rabbitmq.model.RegisterModel;
 import com.group1.rabbitmq.producer.RegisterProducer;
@@ -11,23 +12,26 @@ import com.group1.repository.entity.Manager;
 import com.group1.utility.enums.EState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class ManagerService {
     private final ManagerRepository managerRepository;
     private final RegisterProducer registerProducer;
+
+
     public void register(RegisterRequestDto dto){
         managerRepository.findOptionalByEmailAndPassword(dto.getEmail(),dto.getPassword())
                 .ifPresent(manager->{
                     throw new ManagerException(ErrorType.EMAIL_NOT_FOUND);
                 });
-        Manager manager = ManagerMapper.INSTANCE.fromDto(dto);
-        manager.setState(EState.CONFIRMED);
-        managerRepository.save(manager);
+//        Manager manager = ManagerMapper.INSTANCE.fromDto(dto);
+//        manager.setState(EState.CONFIRMED);
+//        managerRepository.save(manager);
         registerProducer.sendNewUser(RegisterModel.builder()
-                .managerId(manager.getId())
-                .email(manager.getEmail())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
                 .build());
     }
 

@@ -20,3 +20,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+jwt:
+  secretkey: ${java11secretkey}
+  issuer: ${java11issuer}
+  audience: ${java11audience}

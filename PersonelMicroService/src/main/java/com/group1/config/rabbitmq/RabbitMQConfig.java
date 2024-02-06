@@ -16,20 +16,20 @@ public class RabbitMQConfig {
      * 3. Kuyruk oluşturma
      * 4. Kuyruk ile Exchange i bir birine bağlama
      */
-    private final String EXCHANGE_AUTH = "exchange-manager";
-    private final String BIDING_KEY = "key-manager";
-    private final String AUTH_QUEUE = "queue-manager-create-personel";
+    private final String EXCHANGE_MANAGER = "exchange-manager";
+    private final String BINDING_KEY = "key-manager";
+    private final String MANAGER_QUEUE = "queue-manager-create-personel";
     @Bean
     DirectExchange directExchange(){
-        return new DirectExchange(EXCHANGE_AUTH);
+        return new DirectExchange(EXCHANGE_MANAGER);
     }
     @Bean
     Queue queueAuthCreateUser(){
-        return new Queue(AUTH_QUEUE);
+        return new Queue(MANAGER_QUEUE);
     }
     @Bean
     public Binding bindingCreateUser(final DirectExchange directExchange, final Queue queue){
-        return BindingBuilder.bind(queue).to(directExchange).with(BIDING_KEY);
+        return BindingBuilder.bind(queue).to(directExchange).with(BINDING_KEY);
     }
 
 }

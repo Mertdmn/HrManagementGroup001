@@ -17,8 +17,8 @@ public interface ManagerMapper {
     Manager toShowDetails(final Manager manager);
     RegisterRequestDto toRegister(final Manager manager);
     Manager fromRegisterRequestToManager(RegisterRequestDto dto);
-    @Mapping(source = "id", target ="managerId")
-    RegisterModel fromManagerToRegisterModel(Manager manager);
+//    @Mapping(source = "id", target ="managerId")
+//    RegisterModel fromManagerToRegisterModel(Manager manager);
 
     RegisterResponseDto fromManagerToRegisterResponse(Manager manager);
 

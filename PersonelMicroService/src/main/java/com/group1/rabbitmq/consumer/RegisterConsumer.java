@@ -21,7 +21,7 @@ public class RegisterConsumer {
         System.out.println("Kuyruk dinlendi gelen kayıt."+ model.toString());
         personelService.save(PersonelSaveRequestDto.builder()
                         .email(model.getEmail())
-                        .managerId(model.getManagerId())
+                        .password(model.getPassword())
                 .build());
     }
 

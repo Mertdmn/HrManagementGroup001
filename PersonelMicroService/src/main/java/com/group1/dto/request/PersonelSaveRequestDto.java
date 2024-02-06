@@ -15,6 +15,7 @@ import java.util.List;
 public class PersonelSaveRequestDto {
     Long managerId;
     String email;
+    String password;
 //    String password;
 //    List<MultipartFile> images;
 }

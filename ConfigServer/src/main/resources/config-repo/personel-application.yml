@@ -21,12 +21,12 @@ spring:
     hibernate:
       ddl-auto: update
 
-rabbitmq:
-  exchange-auth: auth-exchange
-  register-key: register-key
-  queue-register: register-queue
-  register-mail-key: register-mail-key
-  register-mail-queue: register-mail-queue
+#rabbitmq:
+#  exchange-auth: auth-exchange
+#  register-key: register-key
+#  queue-register: register-queue
+#  register-mail-key: register-mail-key
+#  register-mail-queue: register-mail-queue
 
 jwt:
   secretkey: ${java11secretkey}
