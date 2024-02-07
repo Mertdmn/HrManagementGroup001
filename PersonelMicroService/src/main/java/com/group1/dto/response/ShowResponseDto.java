@@ -15,7 +15,6 @@ public class ShowResponseDto {
     String email;
     String phone;
     String photo;
-    String token;
     String department;
     String address;
     String title;

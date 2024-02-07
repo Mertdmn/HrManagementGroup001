@@ -20,8 +20,7 @@ public class PersonelResponseDto {
     String TCNo;
     String email;
     String phone;
-    String token;
-    String photo;
+//    String photo;
     String company;
     String placeOfBirth;
     LocalDate dateOfBirth;

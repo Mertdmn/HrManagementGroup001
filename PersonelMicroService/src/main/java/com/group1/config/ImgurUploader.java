@@ -51,8 +51,6 @@ public class ImgurUploader {
                 System.out.println(statusCode);
                 return null;
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }

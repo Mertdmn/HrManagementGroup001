@@ -31,7 +31,7 @@ public class Personel {
     String photo;
     String company;
     Long imageId;
-    String placeOfBirth;
+    LocalDate placeOfBirth;
     LocalDate dateOfBirth;
     LocalDate hiringDate;
     LocalDate dismissalDate;

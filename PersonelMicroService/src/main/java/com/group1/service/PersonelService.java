@@ -80,6 +80,22 @@ public class PersonelService {
 
             existingPersonel.setPhone(dto.getPhone());
             existingPersonel.setAddress(dto.getAddress());
+            existingPersonel.setCompany(dto.getCompany());
+            existingPersonel.setDateOfBirth(dto.getDateOfBirth());
+            existingPersonel.setDepartment(dto.getDepartment());
+            existingPersonel.setDismissalDate(dto.getDismissalDate());
+            existingPersonel.setHiringDate(dto.getHiringDate());
+            existingPersonel.setRemainingDaysOff(dto.getRemainingDaysOff());
+            existingPersonel.setRole(dto.getRole());
+            existingPersonel.setSalary(dto.getSalary());
+            existingPersonel.setSecondName(dto.getSecondName());
+            existingPersonel.setSecondSurname(dto.getSecondSurname());
+            existingPersonel.setState(dto.getState());
+            existingPersonel.setTitle(dto.getTitle());
+            existingPersonel.setTCNo(dto.getTCNo());
+            existingPersonel.setName(dto.getName());
+            existingPersonel.setSurname(dto.getSurname());
+            existingPersonel.setPlaceOfBirth(dto.getPlaceOfBirth());
             personelRepository.save(existingPersonel);
         } else {
             throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
