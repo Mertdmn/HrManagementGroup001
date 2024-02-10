@@ -9,4 +9,6 @@ dependencies {
     implementation libs.swaggerui
     implementation libs.validation
     implementation libs.postgresql
+    implementation libs.springBootAmqp
+
 }

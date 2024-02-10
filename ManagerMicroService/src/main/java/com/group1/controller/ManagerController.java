@@ -1,12 +1,10 @@
 package com.group1.controller;
 
+import com.group1.dto.request.GetManagerByTokenRequestDto;
 import com.group1.dto.request.LoginManagerRequestDto;
 import com.group1.dto.request.RegisterRequestDto;
 import com.group1.dto.request.UpdateRequestDto;
-import com.group1.dto.response.BaseResponseDto;
-import com.group1.dto.response.ManagerResponseDto;
-import com.group1.dto.response.RegisterResponseDto;
-import com.group1.dto.response.ShowResponseDto;
+import com.group1.dto.response.*;
 import com.group1.repository.entity.Manager;
 import com.group1.service.ManagerService;
 import jakarta.validation.Valid;
@@ -52,6 +50,30 @@ public class ManagerController {
                         .message("Üyelik Başarı ile gerçekleşti")
                         .build())
                 .build());
+    }
+    @PostMapping(LOGIN)
+    public ResponseEntity<BaseResponseDto<LoginResponseDto>> login(@RequestBody LoginManagerRequestDto dto) {
+        String token=managerService.login(dto);
+        return ResponseEntity.ok(BaseResponseDto.<LoginResponseDto>builder()
+                .responseCode(200)
+                .data(LoginResponseDto.builder()
+                        .isLogin(true)
+                        .token(token)
+                        .build())
+                .build());
+    }
+    @GetMapping(SHOW)
+    public ResponseEntity<ShowResponseDto> showAdminByToken(GetManagerByTokenRequestDto dto){
+        return ResponseEntity.ok(managerService.showAdminByToken(dto));
+    }
+    @PostMapping(UPDATE)
+    public ResponseEntity<Void> update(UpdateRequestDto dto) {
+        managerService.update(dto);
+        return ResponseEntity.ok().build();
+    }
+    @GetMapping(SHOWDETAILS)
+    public ResponseEntity<ManagerResponseDto> showDetails(GetManagerByTokenRequestDto dto){
+        return ResponseEntity.ok(managerService.showDetailsPersonelByToken(dto));
     }
 }
 

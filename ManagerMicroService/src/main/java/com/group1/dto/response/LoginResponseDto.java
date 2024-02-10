@@ -1,4 +1,4 @@
-package com.group1.dto.request;
+package com.group1.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PersonelSaveRequestDto {
-    String email;
-    String password;
+public class LoginResponseDto {
+    boolean isLogin;
+    String token;
 }

@@ -19,6 +19,6 @@ public class RestApiUrls {
 
     public static final String UPDATE = "/update";
 
-    public static final String SHOWDETAILS = "/show-detaıls";
+    public static final String SHOWDETAILS = "/show-details";
 
 }

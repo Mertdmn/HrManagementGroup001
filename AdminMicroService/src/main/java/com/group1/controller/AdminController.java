@@ -1,27 +1,32 @@
 package com.group1.controller;
 
-import com.group1.dto.request.GetAdminByTokenRequestDto;
-import com.group1.dto.request.GetAdminDetailsByTokenRequestDto;
-import com.group1.dto.request.LoginAdminRequestDto;
-import com.group1.dto.request.UpdateAdminRequestDto;
-import com.group1.dto.response.AdminResponseDto;
-import com.group1.dto.response.BaseResponseDto;
-import com.group1.dto.response.LoginResponseDto;
-import com.group1.dto.response.ShowResponseDto;
+import com.group1.dto.request.*;
+import com.group1.dto.response.*;
 import com.group1.service.AdminService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import static com.group1.constants.RestApiUrls.*;
-import static com.group1.constants.RestApiUrls.SHOWDETAILS;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(ADMIN)
 public class AdminController {
     private final AdminService adminService;
-
+    @PostMapping(REGISTER)
+    @CrossOrigin("*")
+    public ResponseEntity<BaseResponseDto<RegisterResponseDto>> register(@RequestBody @Valid RegisterRequestDto dto){
+        adminService.register(dto);
+        return ResponseEntity.ok(BaseResponseDto.<RegisterResponseDto>builder()
+                .responseCode(200)
+                .data(RegisterResponseDto.builder()
+                        .isRegister(true)
+                        .message("Üyelik Başarı ile gerçekleşti")
+                        .build())
+                .build());
+    }
     @PostMapping(LOGIN)
     public ResponseEntity<BaseResponseDto<LoginResponseDto>> login(@RequestBody LoginAdminRequestDto dto) {
         String token=adminService.login(dto);

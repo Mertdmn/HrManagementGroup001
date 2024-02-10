@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface ManagerRepository extends JpaRepository<Manager,Long> {
     Optional<Manager> findOptionalByEmailAndPassword(String email, String password);
+
+    Optional<Manager> findOptionalById(Long id);
 //    ShowResponseDto findAllBy(ShowResponseDto showResponseDto);
 //
 //    @Query("SELECT new com.group1.dto.response.ManagerResponseDto(" +

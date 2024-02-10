@@ -11,8 +11,10 @@ import com.group1.repository.PersonelRepository;
 import com.group1.repository.entity.Personel;
 import com.group1.utility.JwtTokenManager;
 import com.group1.utility.enums.ERole;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
@@ -102,16 +104,6 @@ public class PersonelService {
         }
     }
 
-//    public Optional<PersonelResponseDto> showDetails() {
-//        PersonelResponseDto personelResponseDto=new PersonelResponseDto();
-//        Optional<Long> personelId=jwtTokenManager.getIdFromToken(personelResponseDto.getToken());
-//        if (personelId.isEmpty()) {
-//            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
-//        }
-//
-//         personelResponseDto = personelRepository.findPersonelDetails(personelId.get());
-//        return Optional.ofNullable(personelResponseDto);
-//    }
 
 
 }

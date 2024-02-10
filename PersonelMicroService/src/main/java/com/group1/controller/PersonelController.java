@@ -10,6 +10,7 @@ import com.group1.repository.entity.Personel;
 import com.group1.service.PersonelService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +51,6 @@ public class PersonelController {
     }
 @GetMapping(SHOWDETAILS)
 public ResponseEntity<PersonelResponseDto> showDetails(GetPersonelDetailsByTokenRequestDto dto){
-    return ResponseEntity.ok(personelService.showDetailsPersonelByToken(dto));
+        return ResponseEntity.ok(personelService.showDetailsPersonelByToken(dto));
 }
 }

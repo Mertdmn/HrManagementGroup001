@@ -1,6 +1,8 @@
 package com.group1.service;
 
-import com.group1.dto.request.RegisterRequestDto;
+import com.group1.dto.request.*;
+import com.group1.dto.response.ManagerResponseDto;
+import com.group1.dto.response.ShowResponseDto;
 import com.group1.exception.ErrorType;
 import com.group1.exception.ManagerException;
 import com.group1.manager.PersonelManager;
@@ -9,16 +11,21 @@ import com.group1.rabbitmq.model.RegisterModel;
 import com.group1.rabbitmq.producer.RegisterProducer;
 import com.group1.repository.ManagerRepository;
 import com.group1.repository.entity.Manager;
+import com.group1.utility.JwtTokenManager;
+import com.group1.utility.enums.ERole;
 import com.group1.utility.enums.EState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ManagerService {
     private final ManagerRepository managerRepository;
     private final RegisterProducer registerProducer;
+    private final JwtTokenManager jwtTokenManager;
 
 
     public void register(RegisterRequestDto dto){
@@ -34,52 +41,66 @@ public class ManagerService {
                 .password(dto.getPassword())
                 .build());
     }
-
-    /*
-
-    public Optional<ShowResponseDto> show() {
-        Manager manager= managerRepository.findById(loginUser)
-                .orElseThrow(() -> new ManagerException(ErrorType.MANAGER_NOT_FOUND));
-        ShowResponseDto showResponseDto = ManagerMapper.INSTANCE.toShow(manager);
-        return Optional.ofNullable(managerRepository.findAllBy(showResponseDto));
+    public Manager save(PersonelSaveRequestDto dto){
+        Manager result = managerRepository.save(ManagerMapper.INSTANCE.fromDto(dto));
+        return result;
     }
+    public String login(LoginManagerRequestDto dto) {
+        Optional<Manager> manager= managerRepository.findOptionalByEmailAndPassword(dto.getEmail(),dto.getPassword());
+        if (manager.isEmpty()||manager.get().getRole()== ERole.DISMISSED){
+            throw new ManagerException(ErrorType.LOGIN_ERROR);
+        }
+        Optional<String> token=jwtTokenManager.createToken(manager.get().getId());
+        if (token.isEmpty()){
+            throw new ManagerException(ErrorType.TOKEN_NOT_CREATED);
+        }
+        return token.get();
+    }
+
     public void update(UpdateRequestDto dto) {
-        // Personel entity'sini bul
-        Optional<Manager> existingPersonelOptional = managerRepository.findById(loginUser);
+        Optional<Long> adminId=jwtTokenManager.getIdFromToken(dto.getToken());
+        if (adminId.isEmpty()) {
+            throw new ManagerException(ErrorType.INVALID_TOKEN);
+        }
+        Optional<Manager> existingAdminOptional = managerRepository.findById(adminId.get());
 
-        if (existingPersonelOptional.isPresent()) {
-            Manager existingManager = existingPersonelOptional.get();
-
-            // Update edilecek alanları güncelle
+        if (existingAdminOptional.isPresent()) {
+            Manager existingManager = existingAdminOptional.get();
 
             existingManager.setPhone(dto.getPhone());
-            existingManager.setAddress(dto.getAddress());
-
-            // Güncellenmiş entity'yi kaydet
+            existingManager.setName(dto.getName());
+            existingManager.setSurname(dto.getSurname());
+            existingManager.setSecondName(dto.getSecondName());
+            existingManager.setSecondSurname(dto.getSecondSurname());
+            existingManager.setRole(dto.getRole());
+            existingManager.setTCNo(dto.getTCNo());
             managerRepository.save(existingManager);
         } else {
             throw new ManagerException(ErrorType.MANAGER_NOT_FOUND);
         }
     }
-    public Optional<ManagerResponseDto> showDetails() {
-        managerRepository.findById(loginUser)
-                .orElseThrow(() -> new ManagerException(ErrorType.MANAGER_NOT_FOUND));
-        ManagerResponseDto managerDetails = managerRepository.findManagerDetails(loginUser);
-        return Optional.ofNullable(managerDetails);
-    }
-    public Boolean login(LoginManagerRequestDto dto) {
-        Manager manager1=new Manager();
-        manager1.setEmail("xyz@hotmail.com");
-        manager1.setPassword("123456");
-        managerRepository.save(manager1);
-        Optional<Manager> manager=managerRepository.findOptionalByEmailAndPassword(dto.getEmail(),dto.getPassword());
-        if (manager.isEmpty()||manager.get().getRole()== ERole.DISMISSED){
-            throw new ManagerException(ErrorType.LOGIN_ERROR);
-        }else {
-            loginUser=manager.get().getId();
-            return true;
-        }
-    }
-    */
 
+    public ShowResponseDto showAdminByToken(GetManagerByTokenRequestDto dto) {
+        Optional<Long> adminId=jwtTokenManager.getIdFromToken(dto.getToken());
+        if (adminId.isEmpty()) {
+            throw new ManagerException(ErrorType.INVALID_TOKEN);
+        }
+        Optional<Manager> admin=managerRepository.findOptionalById(adminId.get());
+        if (admin.isEmpty()) {
+            throw new ManagerException(ErrorType.MANAGER_NOT_FOUND);
+        }
+        return ManagerMapper.INSTANCE.toShow(admin.get());
+    }
+
+    public ManagerResponseDto showDetailsPersonelByToken(GetManagerByTokenRequestDto dto) {
+        Optional<Long> adminId=jwtTokenManager.getIdFromToken(dto.getToken());
+        if (adminId.isEmpty()) {
+            throw new ManagerException(ErrorType.INVALID_TOKEN);
+        }
+        Optional<Manager> admin=managerRepository.findOptionalById(adminId.get());
+        if (admin.isEmpty()) {
+            throw new ManagerException(ErrorType.MANAGER_NOT_FOUND);
+        }
+        return ManagerMapper.INSTANCE.toShowDetails(admin.get());
+    }
 }

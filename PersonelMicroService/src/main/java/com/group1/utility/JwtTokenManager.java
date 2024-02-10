@@ -24,7 +24,7 @@ public class JwtTokenManager {
     @Value("${jwt.audience}")
     String audience;
 
-    Long expiration = System.currentTimeMillis() + (1000 * 60 * 5);
+    Long expiration = System.currentTimeMillis() + (1000 * 60 * 2225);
 
 
     public Optional<String> createToken(Long id) {

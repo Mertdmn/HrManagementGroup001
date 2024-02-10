@@ -1,5 +1,6 @@
 package com.group1.dto.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PersonelSaveRequestDto {
-    String email;
-    String password;
+public class GetManagerByTokenRequestDto {
+    @NotNull
+    String token;
 }

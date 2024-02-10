@@ -1,5 +1,6 @@
 package com.group1.dto.request;
 
+import com.group1.utility.enums.ERole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,9 +14,15 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class UpdateAdminRequestDto {
-    String phone;
-    String photo;
     String token;
-    Long imageId;
-    List<MultipartFile> images;
+    String name;
+    String secondName;
+    String surname;
+    String secondSurname;
+    String TCNo;
+    String email;
+    String password;
+    String phone;
+//    String photo;
+    ERole role;
 }
