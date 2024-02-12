@@ -11,10 +11,9 @@ import com.group1.repository.PersonelRepository;
 import com.group1.repository.entity.Personel;
 import com.group1.utility.JwtTokenManager;
 import com.group1.utility.enums.ERole;
-import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
@@ -37,6 +36,9 @@ public class PersonelService {
     public Personel save(PersonelSaveRequestDto dto){
         Personel result = personelRepository.save(PersonelMapper.INSTANCE.fromDto(dto));
         return result;
+    }
+    public Optional<Long> tokenToId(GetPersonelByTokenRequestDto dto){
+        return jwtTokenManager.getIdFromToken(dto.getToken());
     }
 
     public Optional<Personel> findOptionalById(Long id){

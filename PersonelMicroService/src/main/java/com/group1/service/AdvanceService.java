@@ -3,9 +3,13 @@ package com.group1.service;
 
 
 import com.group1.dto.request.AdvanceRequestDto;
+import com.group1.dto.request.GetPersonelByTokenRequestDto;
+import com.group1.dto.response.ShowAdvanceResponseDto;
+import com.group1.dto.response.ShowResponseDto;
 import com.group1.exception.ErrorType;
 import com.group1.exception.PersonelManagerException;
 import com.group1.mapper.AdvanceMapper;
+import com.group1.mapper.PersonelMapper;
 import com.group1.repository.AdvanceRepository;
 import com.group1.repository.entity.Advance;
 import com.group1.repository.entity.Personel;
@@ -45,6 +49,17 @@ private final PersonelService personelService;
         // Spending entity'sine personel bilgisini set etme
         // Diğer işlemleri gerçekleştirme ve avans kaydetme
         return Optional.of(advanceRepository.save(advance));
+    }
+    public ShowAdvanceResponseDto showAdvanceByToken(GetPersonelByTokenRequestDto getPersonelByTokenRequestDto) {
+        Optional<Long> advanceId=jwtTokenManager.getIdFromToken(getPersonelByTokenRequestDto.getToken());
+        if (advanceId.isEmpty()) {
+            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+        }
+        Optional<Advance> advance=advanceRepository.findOptionalById(advanceId.get());
+        if (advance.isEmpty()) {
+            throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
+        }
+        return AdvanceMapper.INSTANCE.toShow(advance.get());
     }
 
 }

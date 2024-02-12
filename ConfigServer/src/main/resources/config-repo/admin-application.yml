@@ -2,15 +2,15 @@ server:
   port: 9092
 
 spring:
-  amqp:
-    deserialization:
-      trust:
-        all: true
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: BilgeAdmin
-    password: Aa123456
+#  amqp:
+#    deserialization:
+#      trust:
+#        all: true
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: BilgeAdmin
+#    password: Aa123456
 
   datasource:
     driver-class-name: org.postgresql.Driver

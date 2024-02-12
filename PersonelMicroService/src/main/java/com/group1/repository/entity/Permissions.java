@@ -19,7 +19,6 @@ public class Permissions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String personelId;
     LocalDate startingDate;
     LocalDate endingDate;
     int usedPermissionDays;

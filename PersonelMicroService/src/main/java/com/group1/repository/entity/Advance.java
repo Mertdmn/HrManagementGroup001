@@ -20,7 +20,6 @@ public class Advance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String personelId;
     double amount;
     LocalDate date;
     @Enumerated(EnumType.STRING)

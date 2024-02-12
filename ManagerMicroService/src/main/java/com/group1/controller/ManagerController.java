@@ -1,9 +1,6 @@
 package com.group1.controller;
 
-import com.group1.dto.request.GetManagerByTokenRequestDto;
-import com.group1.dto.request.LoginManagerRequestDto;
-import com.group1.dto.request.RegisterRequestDto;
-import com.group1.dto.request.UpdateRequestDto;
+import com.group1.dto.request.*;
 import com.group1.dto.response.*;
 import com.group1.repository.entity.Manager;
 import com.group1.service.ManagerService;
@@ -50,6 +47,11 @@ public class ManagerController {
                         .message("Üyelik Başarı ile gerçekleşti")
                         .build())
                 .build());
+    }
+    @PostMapping("/save")
+    public ResponseEntity<Void> save(RegisterManagerRequestDto dto){
+        Manager manager =managerService.save(dto);
+        return ResponseEntity.ok().build();
     }
     @PostMapping(LOGIN)
     public ResponseEntity<BaseResponseDto<LoginResponseDto>> login(@RequestBody LoginManagerRequestDto dto) {

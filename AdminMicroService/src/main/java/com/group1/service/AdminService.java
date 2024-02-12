@@ -5,9 +5,9 @@ import com.group1.dto.response.AdminResponseDto;
 import com.group1.dto.response.ShowResponseDto;
 import com.group1.exception.ErrorType;
 import com.group1.exception.AdminManagerException;
+import com.group1.manager.ManagerManager;
 import com.group1.mapper.AdminMapper;
-import com.group1.rabbitmq.model.ManagerRegisterModel;
-import com.group1.rabbitmq.producer.ManagerRegisterProducer;
+
 import com.group1.repository.AdminRepository;
 import com.group1.repository.entity.Admin;
 import com.group1.utility.JwtTokenManager;
@@ -22,19 +22,19 @@ import java.util.Optional;
 public class AdminService {
     private final AdminRepository adminRepository;
     private final JwtTokenManager jwtTokenManager;
-    private final ManagerRegisterProducer managerRegisterProducer;
+    private final ManagerManager manager;
 
-    public void register(RegisterRequestDto dto){
-        adminRepository.findOptionalByEmailAndPassword(dto.getEmail(),dto.getPassword())
-                .ifPresent(admin->{
-                    throw new AdminManagerException(ErrorType.EMAIL_NOT_FOUND);
-                });
-
-        managerRegisterProducer.sendNewManager(ManagerRegisterModel.builder()
-                .email(dto.getEmail())
-                .password(dto.getPassword())
-                .build());
-    }
+//    public void register(RegisterRequestDto dto){
+//        adminRepository.findOptionalByEmailAndPassword(dto.getEmail(),dto.getPassword())
+//                .ifPresent(admin->{
+//                    throw new AdminManagerException(ErrorType.EMAIL_NOT_FOUND);
+//                });
+//
+//        managerRegisterProducer.sendNewManager(ManagerRegisterModel.builder()
+//                .email(dto.getEmail())
+//                .password(dto.getPassword())
+//                .build());
+//    }
     public String login(LoginAdminRequestDto dto) {
         Optional<Admin> admin= adminRepository.findOptionalByEmailAndPassword(dto.getEmail(),dto.getPassword());
         if (admin.isEmpty()||admin.get().getRole()== ERole.DISMISSED){
@@ -45,6 +45,14 @@ public class AdminService {
             throw new AdminManagerException(ErrorType.TOKEN_NOT_CREATED);
         }
         return token.get();
+    }
+    public void register(RegisterRequestDto dto){
+        Admin admin=AdminMapper.INSTANCE.fromDto(dto);
+//        manager.save(ManagerSaveRequestDto.builder()
+//                .adminId(admin.getId())
+//                .email(admin.getEmail())
+//                .password(dto.getPassword()).build());
+        manager.save(AdminMapper.INSTANCE.fromAdmin(admin));
     }
 
     public void update(UpdateAdminRequestDto dto) {

@@ -1,6 +1,7 @@
 package com.group1.mapper;
 
 import com.group1.dto.request.PersonelSaveRequestDto;
+import com.group1.dto.request.RegisterManagerRequestDto;
 import com.group1.dto.request.RegisterRequestDto;
 import com.group1.dto.response.ManagerResponseDto;
 import com.group1.dto.response.RegisterResponseDto;
@@ -24,5 +25,5 @@ public interface ManagerMapper {
 
     RegisterResponseDto fromManagerToRegisterResponse(Manager manager);
 
-    Manager fromDto(PersonelSaveRequestDto dto);
+    Manager fromDto(RegisterManagerRequestDto dto);
 }

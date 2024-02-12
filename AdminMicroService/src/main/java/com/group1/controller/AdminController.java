@@ -17,7 +17,7 @@ public class AdminController {
     private final AdminService adminService;
     @PostMapping(REGISTER)
     @CrossOrigin("*")
-    public ResponseEntity<BaseResponseDto<RegisterResponseDto>> register(@RequestBody @Valid RegisterRequestDto dto){
+    public ResponseEntity<BaseResponseDto<RegisterResponseDto>> register(RegisterRequestDto dto){
         adminService.register(dto);
         return ResponseEntity.ok(BaseResponseDto.<RegisterResponseDto>builder()
                 .responseCode(200)

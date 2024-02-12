@@ -41,7 +41,7 @@ public class ManagerService {
                 .password(dto.getPassword())
                 .build());
     }
-    public Manager save(PersonelSaveRequestDto dto){
+    public Manager save(RegisterManagerRequestDto dto){
         Manager result = managerRepository.save(ManagerMapper.INSTANCE.fromDto(dto));
         return result;
     }

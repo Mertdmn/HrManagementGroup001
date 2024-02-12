@@ -1,7 +1,8 @@
-package com.group1.repository.entity;
+package com.group1.dto.response;
 
 import com.group1.utility.enums.EState;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,19 +11,16 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Entity
-@Table(name = "tbl_items")
-public class Items {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class ShowPermissionsResponseDto {
     LocalDate startingDate;
     LocalDate endingDate;
-    String name;
+    int usedPermissionDays;
+    String type;
+    LocalDate requestDate;
     @Enumerated(EnumType.STRING)
-    EState State;
+    EState state;
     LocalDate responseDate;
 }

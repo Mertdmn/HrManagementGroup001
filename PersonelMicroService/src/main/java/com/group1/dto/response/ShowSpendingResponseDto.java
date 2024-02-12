@@ -1,8 +1,9 @@
-package com.group1.repository.entity;
+package com.group1.dto.response;
 
 import com.group1.utility.enums.ECurrency;
 import com.group1.utility.enums.EState;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,15 +12,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Entity
-@Table(name = "tbl_spending")
-public class Spending {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class ShowSpendingResponseDto {
     LocalDate requestDate;
     @Enumerated(EnumType.STRING)
     EState state;
@@ -27,5 +23,4 @@ public class Spending {
     ECurrency currency;
     String file;
     String description;
-    Long personelId;
 }

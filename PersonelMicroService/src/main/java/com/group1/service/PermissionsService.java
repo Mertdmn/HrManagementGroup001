@@ -1,12 +1,16 @@
 package com.group1.service;
 
+import com.group1.dto.request.GetPersonelByTokenRequestDto;
 import com.group1.dto.request.PermissionRequestDto;
+import com.group1.dto.response.ShowPermissionsResponseDto;
 import com.group1.exception.ErrorType;
 import com.group1.exception.PersonelManagerException;
 import com.group1.mapper.PermissionsMapper;
+import com.group1.mapper.SpendingMapper;
 import com.group1.repository.PermissionsRepository;
 import com.group1.repository.entity.Permissions;
 import com.group1.repository.entity.Personel;
+import com.group1.repository.entity.Spending;
 import com.group1.utility.JwtTokenManager;
 import com.group1.utility.enums.EState;
 import lombok.RequiredArgsConstructor;
@@ -37,4 +41,17 @@ public class PermissionsService {
         }
         return Optional.of(permissionsRepository.save(permissions));
     }
-}
+
+    public ShowPermissionsResponseDto showPermissionsByToken(GetPersonelByTokenRequestDto dto) {
+        Optional<Long> permissionsId=jwtTokenManager.getIdFromToken(dto.getToken());
+        if (permissionsId.isEmpty()) {
+            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+        }
+        Optional<Permissions> spending=permissionsRepository.findOptionalById(permissionsId.get());
+        if (spending.isEmpty()) {
+            throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
+        }
+        return PermissionsMapper.INSTANCE.toShow(spending.get());
+    }
+    }
+

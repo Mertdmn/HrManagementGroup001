@@ -1,6 +1,9 @@
 package com.group1.controller;
 
+import com.group1.dto.request.GetPersonelByTokenRequestDto;
 import com.group1.dto.request.ItemsRequestDto;
+import com.group1.dto.response.ShowAdvanceResponseDto;
+import com.group1.dto.response.ShowItemsResponseDto;
 import com.group1.repository.entity.Items;
 import com.group1.service.ItemsService;
 import jakarta.validation.Valid;
@@ -21,7 +24,10 @@ public class ItemsController {
     public ResponseEntity<Optional<Items>>createItems(@RequestBody @Valid ItemsRequestDto dto){
         return ResponseEntity.ok(itemsService.createItems(dto));
     }
-
+    @GetMapping(SHOW)
+    public ResponseEntity<ShowItemsResponseDto> showPersonelByToken(GetPersonelByTokenRequestDto dto){
+        return ResponseEntity.ok(itemsService.showAdvanceByToken(dto));
+    }
 
 
 

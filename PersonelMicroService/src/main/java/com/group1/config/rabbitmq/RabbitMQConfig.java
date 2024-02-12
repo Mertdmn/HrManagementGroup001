@@ -24,11 +24,11 @@ public class RabbitMQConfig {
         return new DirectExchange(EXCHANGE_MANAGER);
     }
     @Bean
-    Queue queueAuthCreateUser(){
+    Queue queueAuthCreatePersonel(){
         return new Queue(MANAGER_QUEUE);
     }
     @Bean
-    public Binding bindingCreateUser(final DirectExchange directExchange, final Queue queue){
+    public Binding bindingCreatePersonel(final DirectExchange directExchange, final Queue queue){
         return BindingBuilder.bind(queue).to(directExchange).with(BINDING_KEY);
     }
 

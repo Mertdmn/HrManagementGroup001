@@ -1,11 +1,16 @@
 package com.group1.service;
 
 import com.group1.dto.request.BreaksRequestDto;
+import com.group1.dto.request.GetPersonelByTokenRequestDto;
 import com.group1.dto.request.ShiftRequestDto;
+import com.group1.dto.response.ShowAdvanceResponseDto;
+import com.group1.dto.response.ShowBreaksAndShiftsResponseDto;
 import com.group1.exception.ErrorType;
 import com.group1.exception.PersonelManagerException;
+import com.group1.mapper.AdvanceMapper;
 import com.group1.mapper.BreaksAndShiftsMapper;
 import com.group1.repository.BreaksAndShiftsRepository;
+import com.group1.repository.entity.Advance;
 import com.group1.repository.entity.BreaksAndShifts;
 import com.group1.repository.entity.Personel;
 import com.group1.utility.JwtTokenManager;
@@ -47,6 +52,17 @@ public class BreaksAndShiftsService {
             throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
         }
         return Optional.of(breaksAndShiftsRepository.save(breaksAndShifts));
+    }
+        public ShowBreaksAndShiftsResponseDto showAdvanceByToken(GetPersonelByTokenRequestDto getPersonelByTokenRequestDto) {
+        Optional<Long> breaksAndShiftsId=jwtTokenManager.getIdFromToken(getPersonelByTokenRequestDto.getToken());
+        if (breaksAndShiftsId.isEmpty()) {
+            throw new PersonelManagerException(ErrorType.INVALID_TOKEN);
+        }
+        Optional<BreaksAndShifts> breaksAndShifts=breaksAndShiftsRepository.findOptionalById(breaksAndShiftsId.get());
+        if (breaksAndShifts.isEmpty()) {
+            throw new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND);
+        }
+        return BreaksAndShiftsMapper.INSTANCE.toShow(breaksAndShifts.get());
     }
 
 }
