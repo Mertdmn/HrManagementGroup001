@@ -8,6 +8,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AdminMicroService" />
+            <option value="$PROJECT_DIR$/ConfigServer" />
+            <option value="$PROJECT_DIR$/ManagerMicroService" />
+            <option value="$PROJECT_DIR$/PersonelMicroService" />
           </set>
         </option>
       </GradleProjectSettings>
