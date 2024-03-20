@@ -23,15 +23,19 @@ public class Personel implements Serializable {
    @Id
    private String id;
    private String name;
+   private String secondName;
    private String surname;
-   private String tcno;
+   private String secondSurname;
+   private String TCNo;
    private String email;
    private String password;
    private String phone;
    private String photo;
    private String company;
+   private String placeOfBirth;
    private LocalDate dateOfBirth;
    private LocalDate hiringDate;
+   private LocalDate dismissalDate;
    private String department;
    private String address;
    private String title;

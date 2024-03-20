@@ -1,22 +1,22 @@
-package com.group1.dto.request;
+package com.group1.dto.response;
 
-import com.group1.utility.enums.EState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemsRequestDto {
+public class ShowResponseDto {
     String personelId;
-    LocalDate startingDate;
-    LocalDate endingDate;
     String name;
-    EState State;
-
+    String surname;
+    String email;
+    String phone;
+    String photo;
+    String department;
+    String address;
+    String title;
 }

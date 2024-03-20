@@ -2,6 +2,7 @@ package com.group1.mapper;
 
 
 import com.group1.dto.response.RegisterResponseDto;
+import com.group1.dto.response.ShowResponseDto;
 import com.group1.repository.entity.Personel;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -18,6 +19,8 @@ public interface PersonelMapper {
      * @return
      */
 //    Personel fromRegisterRequestToPersonel(RegisterRequestDto dto);
+    ShowResponseDto toShow(final Personel personel);
+
 
     RegisterResponseDto fromPersonelToRegisterResponse(Personel personel);
 }
