@@ -1,0 +1,27 @@
+server:
+  port: 9092
+
+spring:
+#  amqp:
+#    deserialization:
+#      trust:
+#        all: true
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: BilgeAdmin
+#    password: Aa123456
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: root
+    url: jdbc:postgresql://localhost:5432/AdminDB
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+jwt:
+  secretkey: ${java11secretkey}
+  issuer: ${java11issuer}
+  audience: ${java11audience}

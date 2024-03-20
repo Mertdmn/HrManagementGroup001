@@ -13,11 +13,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PermissionRequestDto {
-    String personelId;
     LocalDate startingDate;
     LocalDate endingDate;
     int usedPermissionDays;
     String type;
+    String token;
     LocalDate requestDate;
+    LocalDate responseDate;
     EState state;
 }

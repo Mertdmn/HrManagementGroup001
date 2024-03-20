@@ -1,7 +1,6 @@
 package com.group1.repository;
 
 
-import com.group1.dto.response.ShowResponseDto;
 import com.group1.repository.entity.Personel;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -12,7 +11,11 @@ public interface PersonelRepository extends MongoRepository<Personel,String> {
 
 
    Optional<Personel> findById(String id);
-   ShowResponseDto findAllBy(ShowResponseDto dto);
 
+
+
+   Optional<Personel>findPersonelByTcno(String TCNO);
+
+   Optional<Personel>findPersonelByNameAndSurname(String name,String surname);
 
 }

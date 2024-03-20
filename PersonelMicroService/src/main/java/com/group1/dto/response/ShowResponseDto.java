@@ -10,7 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShowResponseDto {
+<<<<<<< HEAD
     String personelId;
+=======
+>>>>>>> origin/main
     String name;
     String surname;
     String email;

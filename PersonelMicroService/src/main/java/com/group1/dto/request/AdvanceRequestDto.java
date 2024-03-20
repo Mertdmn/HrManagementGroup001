@@ -15,11 +15,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 public class AdvanceRequestDto {
-    String personelId;
     double amount;
     LocalDate date;
-    EState state;
     LocalDate responseDate;
+    EState state;
     ECurrency currency;
+    String token;
 
 }

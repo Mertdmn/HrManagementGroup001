@@ -4,7 +4,6 @@ package com.group1.service;
 import com.group1.dto.request.LoginPersonelRequestDto;
 import com.group1.dto.request.RegisterRequestDto;
 import com.group1.dto.response.RegisterResponseDto;
-import com.group1.dto.response.ShowResponseDto;
 import com.group1.exception.ErrorType;
 import com.group1.exception.PersonelManagerException;
 import com.group1.mapper.PersonelMapper;
@@ -40,6 +39,7 @@ public class PersonelService {
         }else {
             loginUser=personel.get().getId();
             return true;
+
         }
 
     }
@@ -77,16 +77,16 @@ public class PersonelService {
         return personelRepository.findById(id);
     }
 
+    public Optional<Personel>findPersonelByTCNO(String TCNO){
+        return personelRepository.findPersonelByTcno(TCNO);
+    }
 
     public Optional<Personel> findByIdFromLoginUser() {
         return personelRepository.findById(loginUser);
     }
 
-    public Optional<ShowResponseDto> show(String personelId) {
-        Personel personel = personelRepository.findById(personelId)
-                .orElseThrow(() -> new PersonelManagerException(ErrorType.PERSONEL_NOT_FOUND));
-        ShowResponseDto showResponseDto = PersonelMapper.INSTANCE.toShow(personel);
-        return Optional.ofNullable(personelRepository.findAllBy(showResponseDto));
+    public Optional<Personel>findPersonelByNameAndSurname(String name,String surname){
+        return personelRepository.findPersonelByNameAndSurname(name,surname);
     }
 
 /*

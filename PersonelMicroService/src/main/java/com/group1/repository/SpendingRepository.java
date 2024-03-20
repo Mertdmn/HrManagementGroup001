@@ -1,8 +1,12 @@
 package com.group1.repository;
 
 
+import com.group1.repository.entity.Items;
 import com.group1.repository.entity.Spending;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SpendingRepository extends MongoRepository<Spending,String> {
+import java.util.Optional;
+
+public interface SpendingRepository extends JpaRepository<Spending,Long> {
+    Optional<Spending> findOptionalById(Long id);
 }

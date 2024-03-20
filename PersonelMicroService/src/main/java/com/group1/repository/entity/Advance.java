@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 @Builder
@@ -19,7 +18,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Document
-public class Advance implements Serializable {
+public class Advance {
     @Id
     private String id;
     private String personelId;

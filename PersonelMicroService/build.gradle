@@ -4,7 +4,12 @@ buildscript {
     }
 }
 dependencies {
-    implementation libs.springCloudConfig
-    implementation libs.springBootDataMongoDB
-    implementation libs.swaggerui
+    implementation libs.httpClient
+    implementation libs.httpMime
+    implementation libs.springBootDataJpa
+    implementation libs.validation
+    implementation libs.springBootAmqp
+    implementation libs.springCloudOpenFeign
+    implementation libs.postgresql
+    implementation libs.springCloudConfigClient
 }

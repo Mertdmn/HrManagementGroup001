@@ -6,6 +6,6 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: LokalDockerUser
+      database: PersonelDB
       username: defaultUser
       password: bilge!*123

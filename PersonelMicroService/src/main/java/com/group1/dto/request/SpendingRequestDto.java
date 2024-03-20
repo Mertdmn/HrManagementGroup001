@@ -16,7 +16,6 @@ import java.time.LocalDate;
 @Data
 public class SpendingRequestDto {
     String type;
-    String personelId;
     double amount;
     LocalDate spendingDate;
     LocalDate responseDate;
@@ -25,5 +24,6 @@ public class SpendingRequestDto {
     ECurrency currency;
     String file;
     String description;
+    String token;
 
 }

@@ -2,8 +2,12 @@ package com.group1.repository;
 
 
 import com.group1.repository.entity.Advance;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.group1.repository.entity.Personel;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AdvanceRepository extends MongoRepository<Advance,String> {
+import java.util.Optional;
 
+public interface AdvanceRepository extends JpaRepository<Advance,Long> {
+
+    Optional<Advance> findOptionalById(Long id);
 }
